@@ -8,10 +8,10 @@ options:
 packages:
   GoogleMobileAds:
     url: https://github.com/googleads/swift-package-manager-google-mobile-ads.git
-    from: 11.0.0
+    from: 13.0.0
   UserMessagingPlatform:
     url: https://github.com/googleads/swift-package-manager-google-user-messaging-platform.git
-    from: 2.3.0
+    from: 3.0.0
   Adhan:
     url: https://github.com/batoulapps/adhan-swift.git
     from: 1.4.0
@@ -92,6 +92,6 @@ targets:
       - package: GoogleMobileAds
         product: GoogleMobileAds
       - package: UserMessagingPlatform
-        product: GoogleUserMessagingPlatform
+        product: UserMessagingPlatform
       - package: Adhan
         product: Adhan
