@@ -145,7 +145,7 @@ final class AdsManager: NSObject, ObservableObject {
             do {
                 interstitial = try await InterstitialAd.load(
                     with: AdConfig.effectiveInterstitialUnitID,
-                    request: Request()
+                    request: GADRequest()
                 )
                 interstitial?.fullScreenContentDelegate = self
             } catch {
