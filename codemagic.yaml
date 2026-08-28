@@ -1,16 +1,13 @@
 # Codemagic CI/CD yapılandırması — Kıble Bul (iOS)
 #
-# Bu dosya, kodu GitHub'a push ettiğinizde Codemagic'in bulutta otomatik
-# olarak bir Mac açıp uygulamayı derlemesini, imzalamasını ve TestFlight'a
-# yüklemesini sağlar. Siz hiçbir zaman bir Mac görmeniz gerekmez.
+# Kod imzalama, Codemagic'te KALICI olarak saklanan kimliklerle yapılır:
+#   - Sertifika:  kiblebul_distribution      (Apple Distribution)
+#   - Profil:     kiblebul_appstore_profile  (App Store, com.miktat55.kiblebul)
 #
-# Kod imzalama notu:
-# Derleme makinesinde yeni bir özel anahtar üretilip App Store Connect API
-# ile dağıtım sertifikası ve provisioning profile oluşturulur
-# (fetch-signing-files --create). Apple hesap başına en fazla 3 dağıtım
-# sertifikasına izin verir; bu yüzden eski/kullanılmayan sertifikaları
-# developer.apple.com > Certificates bölümünden ara sıra temizlemek
-# gerekebilir.
+# Bu sayede her derlemede Apple'da yeni sertifika oluşturulmaz; Apple'ın
+# "en fazla 3 dağıtım sertifikası" sınırına takılma sorunu ortadan kalkar.
+# Kimlikleri değiştirmek gerekirse: Codemagic > Settings >
+# Code signing identities.
 
 workflows:
   ios-kiblebul:
@@ -20,8 +17,12 @@ workflows:
     environment:
       xcode: latest
       vars:
-        BUNDLE_ID: "com.miktat55.kiblebul"
         XCODE_SCHEME: "KibleBul"
+      ios_signing:
+        provisioning_profiles:
+          - kiblebul_appstore_profile
+        certificates:
+          - kiblebul_distribution
     integrations:
       app_store_connect: app_store_connect
 
@@ -38,19 +39,13 @@ workflows:
           brew install xcodegen
           xcodegen generate
 
-      - name: Otomatik kod imzalama profillerini kur
-        script: |
-          keychain initialize && ssh-keygen -t rsa -b 2048 -m PEM -f /tmp/cert_key -q -N ""
-          app-store-connect fetch-signing-files "$BUNDLE_ID" --type IOS_APP_STORE --certificate-key=@file:/tmp/cert_key --create
-          keychain add-certificates
-          xcode-project use-profiles
-
       - name: Bağımlılıkları çöz (Swift Package Manager)
         script: |
           xcodebuild -resolvePackageDependencies -project KibleBul.xcodeproj
 
       - name: Archive ve .ipa oluştur
         script: |
+          xcode-project use-profiles
           xcode-project build-ipa --project "KibleBul.xcodeproj" --scheme "$XCODE_SCHEME" || { echo "===== XCODEBUILD LOG ====="; tail -150 /tmp/xcodebuild_logs/*.log; exit 1; }
 
     artifacts:
