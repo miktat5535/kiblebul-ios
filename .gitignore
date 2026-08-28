@@ -1,0 +1,16 @@
+# XcodeGen tarafından otomatik üretilir — depoya eklenmez
+*.xcodeproj/
+*.xcworkspace/
+
+# Xcode kullanıcı verileri / build çıktıları
+build/
+DerivedData/
+*.xcuserstate
+.DS_Store
+
+# Swift Package Manager
+.build/
+.swiftpm/
+
+# Codemagic çıktıları
+/build/ios/

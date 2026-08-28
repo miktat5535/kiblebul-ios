@@ -1,0 +1,86 @@
+# Codemagic CI/CD yapılandırması — Kıble Bul (iOS)
+#
+# Bu dosya, kodu GitHub'a push ettiğinizde Codemagic'in bulutta otomatik
+# olarak bir Mac açıp uygulamayı derlemesini, imzalamasını ve (isteğe bağlı
+# olarak) TestFlight'a yüklemesini sağlar. Siz hiçbir zaman bir Mac
+# görmeniz gerekmez — her şeyi Windows'ta, bir web tarayıcısından
+# yönetirsiniz.
+#
+# KURULUM (README-TR.md'de adım adım anlatılıyor, özet):
+#   1. Bu projeyi bir GitHub deposuna push edin.
+#   2. codemagic.io'da ücretsiz hesap açıp bu depoyu bağlayın.
+#   3. Codemagic → Teams → Code signing identities'de Apple Developer
+#      hesabınızla "Automatic" imzalamayı bağlayın (Codemagic sizi Apple'a
+#      yönlendirip sertifika/profil oluşturmanıza yardımcı olur).
+#   4. TestFlight'a otomatik yükleme istiyorsanız Codemagic → Teams →
+#      Integrations → App Store Connect'te bir API anahtarı ekleyip adını
+#      aşağıdaki APP_STORE_CONNECT_KEY_IDENTIFIER ile eşleştirin.
+#   5. "Start new build" ile ilk derlemeyi başlatın.
+
+workflows:
+  ios-kiblebul:
+    name: Kıble Bul iOS
+    max_build_duration: 60
+    instance_type: mac_mini_m2
+    environment:
+      xcode: latest
+      groups:
+        - app_store_connect # Codemagic UI'da bu grubu App Store Connect API anahtarınızla oluşturun
+      vars:
+        BUNDLE_ID: "com.miktat55.kiblebul"
+        XCODE_SCHEME: "KibleBul"
+      ios_signing:
+        distribution_type: app_store
+        bundle_identifier: com.miktat55.kiblebul
+
+    triggering:
+      events:
+        - push
+      branch_patterns:
+        - pattern: main
+          include: true
+
+    scripts:
+      - name: XcodeGen ile .xcodeproj oluştur
+        script: |
+          brew install xcodegen
+          xcodegen generate
+
+      - name: Otomatik kod imzalama profillerini kur
+        script: |
+          keychain initialize
+          app-store-connect fetch-signing-files "$BUNDLE_ID" \
+            --type IOS_APP_STORE \
+            --create
+          keychain add-certificates
+          xcode-project use-profiles
+
+      - name: Bağımlılıkları çöz (Swift Package Manager)
+        script: |
+          xcodebuild -resolvePackageDependencies -project KibleBul.xcodeproj
+
+      - name: Archive ve .ipa oluştur
+        script: |
+          xcode-project build-ipa \
+            --project "KibleBul.xcodeproj" \
+            --scheme "$XCODE_SCHEME"
+
+    artifacts:
+      - build/ios/ipa/*.ipa
+      - /tmp/xcodebuild_logs/*.log
+
+    publishing:
+      # E-posta ile derleme bildirimi (isteğe bağlı, kendi adresinizi yazın)
+      email:
+        recipients:
+          - miktat55@gmail.com
+        notify:
+          success: true
+          failure: true
+
+      # TestFlight'a otomatik yükleme (App Store Connect API anahtarını
+      # Codemagic'te tanımladıktan sonra bu bölüm otomatik çalışır).
+      app_store_connect:
+        auth: integration
+        submit_to_testflight: true
+        submit_to_app_store: false
