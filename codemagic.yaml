@@ -29,11 +29,8 @@ workflows:
       vars:
         BUNDLE_ID: "com.miktat55.kiblebul"
         XCODE_SCHEME: "KibleBul"
-      ios_signing:
-        distribution_type: app_store
-        bundle_identifier: com.miktat55.kiblebul
     integrations:
-      app_store_connect: app_store_connect
+        app_store_connect: app_store_connect
 
     triggering:
       events:
