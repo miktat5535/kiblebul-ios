@@ -20,6 +20,11 @@ enum NotificationManager {
         }
     }
 
+    /// Planlanmış tüm ezan vakti bildirimlerini iptal eder.
+    static func cancelAll() {
+        UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+    }
+
     /// Var olan tüm ezan vakti bildirimlerini temizleyip önümüzdeki `days`
     /// gün için yeniden planlar. Konum değiştiğinde veya ayarlar
     /// güncellendiğinde tekrar çağrılmalıdır.

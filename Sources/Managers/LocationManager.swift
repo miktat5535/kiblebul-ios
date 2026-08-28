@@ -24,7 +24,16 @@ final class LocationManager: NSObject, ObservableObject {
     }
 
     func requestPermission() {
-        manager.requestWhenInUseAuthorization()
+        switch manager.authorizationStatus {
+        case .notDetermined:
+            manager.requestWhenInUseAuthorization()
+        case .authorizedWhenInUse, .authorizedAlways:
+            // İzin daha önce verilmişse `locationManagerDidChangeAuthorization`
+            // tekrar tetiklenmeyebilir; güncellemeleri burada elle başlatıyoruz.
+            start()
+        default:
+            break
+        }
     }
 
     func start() {
