@@ -6,6 +6,7 @@ struct SettingsView: View {
 
     @State private var notificationsEnabled = false
     @State private var isPurchasing = false
+    @State private var notificationMessage: String?
 
     var body: some View {
         NavigationStack {
@@ -55,6 +56,11 @@ struct SettingsView: View {
                         .onChange(of: notificationsEnabled) { _, isOn in
                             handleNotificationToggle(isOn)
                         }
+                    if let notificationMessage {
+                        Text(notificationMessage)
+                            .font(.footnote)
+                            .foregroundStyle(.orange)
+                    }
                     Text("Bildirimler yalnızca cihazınızda hesaplanır; konumunuz hiçbir sunucuya gönderilmez.")
                         .font(.footnote)
                         .foregroundStyle(.secondary)
@@ -71,22 +77,29 @@ struct SettingsView: View {
 
     private func handleNotificationToggle(_ isOn: Bool) {
         guard isOn else {
+            notificationMessage = nil
             // Kullanıcı kapattıysa planlı bildirimleri temizle.
-            Task { @MainActor in
-                if let location = locationManager.location {
-                    NotificationManager.reschedule(for: location, days: 0)
-                }
-            }
+            NotificationManager.cancelAll()
             return
         }
 
-        Task {
+        Task { @MainActor in
             let granted = await NotificationManager.requestPermission()
-            guard granted, let location = locationManager.location else {
-                await MainActor.run { notificationsEnabled = false }
+
+            guard granted else {
+                notificationsEnabled = false
+                notificationMessage = "Bildirim izni verilmedi. iPhone Ayarlar > Bildirimler > Kıble Bul bölümünden açabilirsiniz."
                 return
             }
+
+            guard let location = locationManager.location else {
+                notificationsEnabled = false
+                notificationMessage = "Konum henüz alınamadı. Konum bulunduktan sonra tekrar deneyin."
+                return
+            }
+
             NotificationManager.reschedule(for: location)
+            notificationMessage = "Önümüzdeki 7 gün için vakit bildirimleri kuruldu."
         }
     }
 }

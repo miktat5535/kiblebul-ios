@@ -9,10 +9,15 @@ struct BannerAdView: View {
     let show: Bool
 
     var body: some View {
-        if show {
-            BannerAdRepresentable()
-                .frame(height: 50)
+        Group {
+            if show {
+                BannerAdRepresentable()
+                    .frame(height: 50)
+            }
         }
+        // Banner hiçbir zaman kendi 50 puanlık alanının dışına taşmaz ve
+        // altındaki/üstündeki hiçbir kontrolün dokunuşunu yutmaz.
+        .clipped()
     }
 }
 

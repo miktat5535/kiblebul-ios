@@ -50,6 +50,29 @@ struct MosqueMapView: View {
                 }
             }
             .navigationTitle("Yakındaki Camiler")
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button {
+                        guard let location = locationManager.location else { return }
+                        Task { await searchNearbyMosques(around: location) }
+                    } label: {
+                        Image(systemName: "arrow.clockwise")
+                    }
+                    .disabled(locationManager.location == nil || isLoading)
+                }
+            }
+            // Sekmeye geçildiğinde konum ZATEN biliniyorsa `onChange` bir daha
+            // tetiklenmez; bu yüzden ilk aramayı burada da başlatıyoruz.
+            // (Kullanıcı Pusula sekmesinde beklerken konum gelir, sonra
+            // Camiler sekmesine geçerdi ve harita hiç arama yapmazdı.)
+            .task {
+                guard mosques.isEmpty, !isLoading, let location = locationManager.location else { return }
+                didCenterOnUser = true
+                cameraPosition = .region(
+                    MKCoordinateRegion(center: location, span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05))
+                )
+                await searchNearbyMosques(around: location)
+            }
             // Not: CLLocationCoordinate2D'nin Equatable uygunluğu SDK'ya göre
             // değişebildiği için onChange anahtarı olarak sade bir Double?
             // (enlem) kullanıyoruz — belirsizlik veya "redundant conformance"
