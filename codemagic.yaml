@@ -58,9 +58,7 @@ workflows:
 
       - name: Archive ve .ipa oluştur
         script: |
-          xcode-project build-ipa \
-            --project "KibleBul.xcodeproj" \
-            --scheme "$XCODE_SCHEME"
+          xcode-project build-ipa --project "KibleBul.xcodeproj" --scheme "$XCODE_SCHEME" || { echo "===== XCODEBUILD LOG ====="; tail -150 /tmp/xcodebuild_logs/*.log; exit 1; }
 
     artifacts:
       - build/ios/ipa/*.ipa
