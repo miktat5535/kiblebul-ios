@@ -49,6 +49,23 @@ struct MosqueMapView: View {
                         .padding(.bottom, 24)
                 }
             }
+            // Cami verisi OpenStreetMap'ten (Overpass API) gelir. ODbL lisansı
+            // verinin gösterildiği yerde kaynak belirtmeyi zorunlu kılar.
+            //
+            // Not: Bilerek `safeAreaInset` KULLANILMIYOR — bu değiştirici alt
+            // sekme çubuğunun üzerine bindirip dokunuşları yutabiliyor.
+            // `overlay` yalnızca bu görünümün kendi sınırları içinde çizer.
+            .overlay(alignment: .bottomLeading) {
+                Text("Cami verisi © OpenStreetMap katkıda bulunanlar")
+                    .font(.caption2)
+                    .foregroundStyle(.secondary)
+                    .padding(.horizontal, 8)
+                    .padding(.vertical, 3)
+                    .background(.regularMaterial, in: Capsule())
+                    .padding(.leading, 8)
+                    .padding(.bottom, 4)
+                    .allowsHitTesting(false)
+            }
             .navigationTitle("Yakındaki Camiler")
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
