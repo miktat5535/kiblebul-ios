@@ -8,23 +8,36 @@ struct ContentView: View {
     @State private var didShowLaunchInterstitial = false
 
     var body: some View {
-        TabView {
-            CompassView()
-                .tabItem { Label("Pusula", systemImage: "location.north.circle") }
+        // ÖNEMLİ: Banner reklam, TabView'in ÜZERİNE bindirilmez.
+        //
+        // Daha önce `.safeAreaInset(edge: .bottom)` ile TabView'e ekleniyordu.
+        // SwiftUI bu durumda banner'ı sekme çubuğunun tam üstüne, onu
+        // kaplayacak şekilde yerleştiriyor; reklam hiç yüklenmese bile
+        // (boş bir UIView olarak) sekme çubuğuna gelen tüm dokunuşları
+        // yutuyordu. Sonuç: yalnızca ilk sekme (Pusula) görünüyor, hiçbir
+        // sekmeye basılamıyordu. Banner'ı VStack ile sekme çubuğunun ALTINA
+        // alarak bu çakışma tamamen ortadan kalkar.
+        VStack(spacing: 0) {
+            TabView {
+                CompassView()
+                    .tabItem { Label("Pusula", systemImage: "location.north.circle") }
 
-            CameraARView()
-                .tabItem { Label("Kamera", systemImage: "camera") }
+                PrayerTimesView()
+                    .tabItem { Label("Vakitler", systemImage: "clock") }
 
-            MosqueMapView()
-                .tabItem { Label("Camiler", systemImage: "map") }
+                CameraARView()
+                    .tabItem { Label("Kamera", systemImage: "camera") }
 
-            SettingsView()
-                .tabItem { Label("Ayarlar", systemImage: "gearshape") }
-        }
-        .environmentObject(locationManager)
-        .safeAreaInset(edge: .bottom) {
+                MosqueMapView()
+                    .tabItem { Label("Camiler", systemImage: "map") }
+
+                SettingsView()
+                    .tabItem { Label("Ayarlar", systemImage: "gearshape") }
+            }
+
             BannerAdView(show: !storeManager.isProActive)
         }
+        .environmentObject(locationManager)
         .onAppear {
             locationManager.requestPermission()
             showLaunchInterstitialOnce()
@@ -43,7 +56,7 @@ struct ContentView: View {
 
         // Reklamın, ilk ekran tamamen göründükten hemen sonra çıkması için
         // kısa bir gecikme — aniden üstüne binmesin diye.
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
             let rootViewController = UIApplication.shared.connectedScenes
                 .compactMap { ($0 as? UIWindowScene)?.keyWindow }
                 .first?.rootViewController
