@@ -6,16 +6,10 @@
 # görmeniz gerekmez — her şeyi Windows'ta, bir web tarayıcısından
 # yönetirsiniz.
 #
-# KURULUM (README-TR.md'de adım adım anlatılıyor, özet):
-#   1. Bu projeyi bir GitHub deposuna push edin.
-#   2. codemagic.io'da ücretsiz hesap açıp bu depoyu bağlayın.
-#   3. Codemagic → Teams → Code signing identities'de Apple Developer
-#      hesabınızla "Automatic" imzalamayı bağlayın (Codemagic sizi Apple'a
-#      yönlendirip sertifika/profil oluşturmanıza yardımcı olur).
-#   4. TestFlight'a otomatik yükleme istiyorsanız Codemagic → Teams →
-#      Integrations → App Store Connect'te bir API anahtarı ekleyip adını
-#      aşağıdaki APP_STORE_CONNECT_KEY_IDENTIFIER ile eşleştirin.
-#   5. "Start new build" ile ilk derlemeyi başlatın.
+# Kod imzalama: Codemagic'in "otomatik imzalama" özelliği kullanılır
+# (environment.ios_signing). Codemagic, App Store Connect API anahtarını
+# kullanarak sertifikayı ve provisioning profile'ı bir kez oluşturur ve
+# kendi kasasında saklar; sonraki derlemelerde aynısını yeniden kullanır.
 
 workflows:
   ios-kiblebul:
@@ -24,13 +18,14 @@ workflows:
     instance_type: mac_mini_m2
     environment:
       xcode: latest
-      groups:
-        - app_store_connect # Codemagic UI'da bu grubu App Store Connect API anahtarınızla oluşturun
       vars:
         BUNDLE_ID: "com.miktat55.kiblebul"
         XCODE_SCHEME: "KibleBul"
+      ios_signing:
+        distribution_type: app_store
+        bundle_identifier: com.miktat55.kiblebul
     integrations:
-        app_store_connect: app_store_connect
+      app_store_connect: app_store_connect
 
     triggering:
       events:
@@ -45,19 +40,13 @@ workflows:
           brew install xcodegen
           xcodegen generate
 
-      - name: Otomatik kod imzalama profillerini kur
-        script: |
-          keychain initialize && ssh-keygen -t rsa -b 2048 -m PEM -f /tmp/cert_key -q -N ""
-          app-store-connect fetch-signing-files "$BUNDLE_ID" --type IOS_APP_STORE --certificate-key=@file:/tmp/cert_key --create
-          keychain add-certificates
-          xcode-project use-profiles
-
       - name: Bağımlılıkları çöz (Swift Package Manager)
         script: |
           xcodebuild -resolvePackageDependencies -project KibleBul.xcodeproj
 
       - name: Archive ve .ipa oluştur
         script: |
+          xcode-project use-profiles
           xcode-project build-ipa --project "KibleBul.xcodeproj" --scheme "$XCODE_SCHEME" || { echo "===== XCODEBUILD LOG ====="; tail -150 /tmp/xcodebuild_logs/*.log; exit 1; }
 
     artifacts:
@@ -65,7 +54,6 @@ workflows:
       - /tmp/xcodebuild_logs/*.log
 
     publishing:
-      # E-posta ile derleme bildirimi (isteğe bağlı, kendi adresinizi yazın)
       email:
         recipients:
           - miktat55@gmail.com
@@ -73,8 +61,6 @@ workflows:
           success: true
           failure: true
 
-      # TestFlight'a otomatik yükleme (App Store Connect API anahtarını
-      # Codemagic'te tanımladıktan sonra bu bölüm otomatik çalışır).
       app_store_connect:
         auth: integration
         submit_to_testflight: true
