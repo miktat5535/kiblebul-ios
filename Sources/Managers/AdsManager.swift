@@ -107,7 +107,6 @@ final class AdsManager: NSObject, ObservableObject {
 
     private func requestConsentIfNeeded() async {
         let parameters = RequestParameters()
-        parameters.isTaggedForUnderAgeOfConsent = false
 
         await withCheckedContinuation { (continuation: CheckedContinuation<Void, Never>) in
             ConsentInformation.shared.requestConsentInfoUpdate(with: parameters) { _ in
@@ -145,7 +144,7 @@ final class AdsManager: NSObject, ObservableObject {
             do {
                 interstitial = try await InterstitialAd.load(
                     with: AdConfig.effectiveInterstitialUnitID,
-                    request: GADRequest()
+                    request: Request()
                 )
                 interstitial?.fullScreenContentDelegate = self
             } catch {
