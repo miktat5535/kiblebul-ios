@@ -29,13 +29,12 @@ targets:
         CFBundleDisplayName: "Kıble Bul"
         CFBundleIconName: "AppIcon"
         CFBundleShortVersionString: "1.0"
-        CFBundleVersion: "4"
+        CFBundleVersion: "5"
         UILaunchScreen: {}
         UISupportedInterfaceOrientations:
           - UIInterfaceOrientationPortrait
         NSLocationWhenInUseUsageDescription: "Kıble yönünü ve bulunduğunuz konuma göre ezan vakitlerini hesaplayabilmek için konumunuza ihtiyacımız var. Konumunuz hiçbir sunucuya gönderilmez, yalnızca cihazınızda işlenir."
         NSCameraUsageDescription: "Kıble yönünü canlı kamera görüntüsü üzerinde gösterebilmek için kameraya ihtiyacımız var. Görüntü kaydedilmez ve hiçbir yere gönderilmez."
-        NSUserTrackingUsageDescription: "Size daha ilgili reklamlar gösterebilmek için bu veriyi kullanacağız. İzin vermeseniz de uygulama reklamsız çalışmaya devam eder."
         ITSAppUsesNonExemptEncryption: false
         GADApplicationIdentifier: "ca-app-pub-8580294286333632~1988794070"
         SKAdNetworkItems:
@@ -83,7 +82,7 @@ targets:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.miktat55.kiblebul
         MARKETING_VERSION: "1.0"
-        CURRENT_PROJECT_VERSION: "4"
+        CURRENT_PROJECT_VERSION: "5"
         SWIFT_VERSION: "5.0"
         TARGETED_DEVICE_FAMILY: "1"
         DEVELOPMENT_TEAM: ""
