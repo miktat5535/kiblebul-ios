@@ -1,0 +1,2 @@
+"NSLocationWhenInUseUsageDescription" = "Kıble yönünü ve bulunduğunuz konuma göre ezan vakitlerini hesaplayabilmek için konumunuza ihtiyacımız var. Konumunuz hiçbir sunucuya gönderilmez, yalnızca cihazınızda işlenir.";
+"NSCameraUsageDescription" = "Kıble yönünü canlı kamera görüntüsü üzerinde gösterebilmek için kameraya ihtiyacımız var. Görüntü kaydedilmez ve hiçbir yere gönderilmez.";
