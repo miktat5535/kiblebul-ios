@@ -1,0 +1,96 @@
+/* Вкладки */
+"tab.compass" = "Компас";
+"tab.prayer_times" = "Время";
+"tab.camera" = "Камера";
+"tab.mosques" = "Мечети";
+"tab.settings" = "Настройки";
+
+/* Экран компаса */
+"compass.title" = "Kıble Bul";
+"compass.distance" = "Расстояние до Каабы: %d км";
+"compass.status.permission_pending" = "Ожидание разрешения на геолокацию…";
+"compass.status.permission_denied" = "Доступ к геолокации отклонён — включите его в Настройках";
+"compass.status.searching" = "Поиск местоположения…";
+"compass.status.calibrating" = "Калибровка компаса — двигайте телефоном по траектории восьмёрки";
+"compass.status.ready" = "Готово";
+
+/* Экран камеры (AR) */
+"camera.permission_required" = "Требуется доступ к камере";
+"camera.permission_explanation" = "Вы можете разрешить доступ к камере для Kıble Bul в приложении «Настройки».";
+"camera.preparing" = "Подготовка камеры…";
+
+/* Экран мечетей */
+"mosques.loading" = "Поиск мечетей…";
+"mosques.error" = "Не удалось загрузить мечети. Проверьте подключение к интернету и повторите попытку.";
+"mosques.count" = "Найдено мечетей: %d";
+"mosques.attribution" = "Данные о мечетях © участники OpenStreetMap";
+"mosques.title" = "Ближайшие мечети";
+"mosque.unnamed" = "Мечеть без названия";
+
+/* Экран времени намаза */
+"prayer_times.next" = "Следующий намаз: %@";
+"prayer_times.today_section" = "Время на сегодня";
+"prayer_times.disclaimer" = "Время рассчитывается на вашем устройстве на основе вашего местоположения (турецкий / ханафитский метод). Возможны небольшие отличия в разных городах.";
+"prayer_times.waiting_location" = "Ожидание местоположения";
+"prayer_times.waiting_location_detail" = "Для расчёта времени намаза требуется разрешение на геолокацию. После предоставления разрешения время появится автоматически.";
+"prayer_times.request_permission" = "Запросить разрешение на геолокацию";
+"prayer_times.title" = "Время намаза";
+
+/* Названия намазов */
+"prayer.fajr" = "Фаджр";
+"prayer.sunrise" = "Восход солнца";
+"prayer.dhuhr" = "Зухр";
+"prayer.asr" = "Аср";
+"prayer.maghrib" = "Магриб";
+"prayer.isha" = "Иша";
+
+/* Уведомления */
+"notification.title" = "Kıble Bul";
+"notification.body" = "Наступило время %@.";
+/* Настройки — Kıble Pro */
+"settings.title" = "Настройки";
+"settings.pro.section" = "Kıble Bul Pro";
+"settings.pro.active" = "Ваша подписка активна — использование без рекламы";
+"settings.pro.manage" = "Вы можете управлять подпиской или отменить её в Настройках iPhone > Apple ID > Подписки.";
+"settings.pro.restore" = "Восстановить покупки";
+"settings.pro.description" = "Убирает всю рекламу (нижний баннер и стартовую рекламу) из приложения. Все остальные функции полностью работают и без подписки.";
+"settings.pro.monthly_title" = "Kıble Pro Ежемесячно";
+"settings.pro.yearly_title" = "Kıble Pro Ежегодно";
+"settings.pro.per_month" = "%@ / месяц";
+"settings.pro.per_year" = "%@ / год";
+"settings.pro.price_loading" = "Загрузка цены…";
+"settings.pro.price_unavailable" = "Не удалось загрузить цену. Проверьте подключение к интернету и повторите попытку.";
+"settings.pro.subscribe_monthly" = "Оформить месячную подписку";
+"settings.pro.subscribe_yearly" = "Оформить годовую подписку";
+"settings.pro.retry" = "Повторить попытку";
+"settings.pro.savings_badge" = "Лучшая цена";
+"settings.pro.legal_disclaimer" = "Оплата будет списана с вашего аккаунта Apple ID при подтверждении покупки. Подписка продлевается автоматически, если не отменена как минимум за 24 часа до окончания текущего периода; плата за продление списывается в течение 24 часов до окончания периода. Вы можете управлять подпиской или отключить автопродление в любое время в Настройках iPhone > Apple ID > Подписки.";
+"settings.pro.eula" = "Условия использования (EULA)";
+"settings.pro.privacy" = "Политика конфиденциальности";
+"settings.pro.purchase_pending" = "Покупка ожидает подтверждения (например, ограничения «Экранного времени»).";
+"settings.pro.purchase_failed" = "Не удалось завершить покупку: %@";
+"settings.pro.unavailable" = "Подписка сейчас недоступна, попробуйте позже.";
+"settings.pro.restore_failed" = "Не удалось восстановить покупки: %@";
+
+/* Настройки — Звук азана */
+"settings.ezan_sound.section" = "Звук азана";
+"settings.ezan_sound.enable" = "Воспроизводить азан";
+"settings.ezan_sound.style" = "Чтец / Makam";
+"settings.ezan_sound.explanation" = "При наступлении времени намаза вместо звука уведомления воспроизводится настоящий азан (полностью, если приложение открыто, первые 30 секунд — если закрыто).";
+"settings.ezan_sound.style.classic" = "Классический";
+"settings.ezan_sound.style.hicaz" = "Макам Хиджаз";
+"settings.ezan_sound.style.saba" = "Макам Саба";
+"settings.ezan_sound.style.rast" = "Макам Раст";
+
+/* Настройки — Уведомления */
+"settings.notifications.section" = "Уведомления о времени намаза";
+"settings.notifications.toggle" = "Включить уведомления";
+"settings.notifications.permission_denied" = "В разрешении на уведомления отказано. Вы можете включить его в Настройках iPhone > Уведомления > Kıble Bul.";
+"settings.notifications.location_pending" = "Местоположение пока недоступно. Повторите попытку после его определения.";
+"settings.notifications.scheduled" = "Уведомления о времени намаза запланированы на ближайшие 7 дней.";
+"settings.notifications.privacy_note" = "Уведомления рассчитываются только на вашем устройстве; ваше местоположение никогда не отправляется на сервер.";
+
+/* Настройки — О приложении */
+"settings.about.section" = "О приложении";
+"settings.about.version" = "Версия";
+"settings.about.privacy" = "Политика конфиденциальности";
