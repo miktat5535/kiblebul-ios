@@ -1,0 +1,2 @@
+"NSLocationWhenInUseUsageDescription" = "Kami memerlukan lokasi Anda untuk menentukan arah kiblat dan menghitung waktu salat sesuai lokasi Anda. Lokasi Anda tidak pernah dikirim ke server — hanya diproses di perangkat Anda.";
+"NSCameraUsageDescription" = "Kami memerlukan akses kamera untuk menampilkan arah kiblat pada tampilan kamera langsung. Gambar tidak pernah direkam atau dikirim ke mana pun.";
