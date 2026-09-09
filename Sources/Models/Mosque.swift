@@ -47,7 +47,7 @@ enum OverpassMosqueService {
             guard let lat = element.lat ?? element.center?.lat,
                   let lon = element.lon ?? element.center?.lon else { return nil }
             let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: lon)
-            let name = element.tags?["name"] ?? "İsimsiz Cami"
+            let name = element.tags?["name"] ?? NSLocalizedString("mosque.unnamed", comment: "İsimsiz Cami")
             let distance = CLLocation(latitude: lat, longitude: lon).distance(from: centerLocation) / 1000.0
             return Mosque(id: element.id, name: name, coordinate: coordinate, distanceKm: distance)
         }
