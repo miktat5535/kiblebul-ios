@@ -20,19 +20,19 @@ struct ContentView: View {
         VStack(spacing: 0) {
             TabView {
                 CompassView()
-                    .tabItem { Label("Pusula", systemImage: "location.north.circle") }
+                    .tabItem { Label("tab.compass", systemImage: "location.north.circle") }
 
                 PrayerTimesView()
-                    .tabItem { Label("Vakitler", systemImage: "clock") }
+                    .tabItem { Label("tab.prayer_times", systemImage: "clock") }
 
                 CameraARView()
-                    .tabItem { Label("Kamera", systemImage: "camera") }
+                    .tabItem { Label("tab.camera", systemImage: "camera") }
 
                 MosqueMapView()
-                    .tabItem { Label("Camiler", systemImage: "map") }
+                    .tabItem { Label("tab.mosques", systemImage: "map") }
 
                 SettingsView()
-                    .tabItem { Label("Ayarlar", systemImage: "gearshape") }
+                    .tabItem { Label("tab.settings", systemImage: "gearshape") }
             }
 
             BannerAdView(show: !storeManager.isProActive)
