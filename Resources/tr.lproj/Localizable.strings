@@ -1,0 +1,97 @@
+/* Sekmeler */
+"tab.compass" = "Pusula";
+"tab.prayer_times" = "Vakitler";
+"tab.camera" = "Kamera";
+"tab.mosques" = "Camiler";
+"tab.settings" = "Ayarlar";
+
+/* Pusula ekranı */
+"compass.title" = "Kıble Bul";
+"compass.distance" = "Kâbe'ye uzaklık: %d km";
+"compass.status.permission_pending" = "Konum izni bekleniyor…";
+"compass.status.permission_denied" = "Konum izni verilmedi — Ayarlar'dan izin verin";
+"compass.status.searching" = "Konum aranıyor…";
+"compass.status.calibrating" = "Pusula kalibre ediliyor — telefonu 8 çizerek sallayın";
+"compass.status.ready" = "Hazır";
+
+/* Kamera (AR) ekranı */
+"camera.permission_required" = "Kamera izni gerekli";
+"camera.permission_explanation" = "Ayarlar uygulamasından Kıble Bul için kamera iznini açabilirsiniz.";
+"camera.preparing" = "Kamera hazırlanıyor…";
+
+/* Camiler ekranı */
+"mosques.loading" = "Camiler aranıyor…";
+"mosques.error" = "Camiler yüklenemedi. İnternet bağlantınızı kontrol edip tekrar deneyin.";
+"mosques.count" = "%d cami bulundu";
+"mosques.attribution" = "Cami verisi © OpenStreetMap katkıda bulunanlar";
+"mosques.title" = "Yakındaki Camiler";
+"mosque.unnamed" = "İsimsiz Cami";
+
+/* Namaz vakitleri ekranı */
+"prayer_times.next" = "Sıradaki vakit: %@";
+"prayer_times.today_section" = "Bugünün Vakitleri";
+"prayer_times.disclaimer" = "Vakitler bulunduğunuz konuma göre cihazınızda hesaplanır (Türkiye / Hanefî). Farklı şehirlerde küçük farklar olabilir.";
+"prayer_times.waiting_location" = "Konum bekleniyor";
+"prayer_times.waiting_location_detail" = "Namaz vakitlerini hesaplayabilmek için konum iznine ihtiyaç var. İzin verdikten sonra vakitler otomatik gelir.";
+"prayer_times.request_permission" = "Konum İznini İste";
+"prayer_times.title" = "Namaz Vakitleri";
+
+/* Vakit isimleri */
+"prayer.fajr" = "İmsak";
+"prayer.sunrise" = "Güneş";
+"prayer.dhuhr" = "Öğle";
+"prayer.asr" = "İkindi";
+"prayer.maghrib" = "Akşam";
+"prayer.isha" = "Yatsı";
+
+/* Bildirimler */
+"notification.title" = "Kıble Bul";
+"notification.body" = "%@ vakti girdi.";
+
+/* Ayarlar — Kıble Pro */
+"settings.title" = "Ayarlar";
+"settings.pro.section" = "Kıble Bul Pro";
+"settings.pro.active" = "Aboneliğiniz aktif — reklamsız kullanım";
+"settings.pro.manage" = "Aboneliğinizi iPhone Ayarlar > Apple Kimliği > Abonelikler bölümünden yönetebilir veya iptal edebilirsiniz.";
+"settings.pro.restore" = "Satın Almaları Geri Yükle";
+"settings.pro.description" = "Uygulamadaki tüm reklamları (alt banner ve açılış reklamı) kaldırır. Uygulamanın diğer tüm özellikleri abonelik olmadan da tam olarak çalışır.";
+"settings.pro.monthly_title" = "Kıble Pro Aylık";
+"settings.pro.yearly_title" = "Kıble Pro Yıllık";
+"settings.pro.per_month" = "%@ / ay";
+"settings.pro.per_year" = "%@ / yıl";
+"settings.pro.price_loading" = "Fiyat yükleniyor…";
+"settings.pro.price_unavailable" = "Fiyat şu anda alınamadı. İnternet bağlantınızı kontrol edip tekrar deneyin.";
+"settings.pro.subscribe_monthly" = "Aylık Abone Ol";
+"settings.pro.subscribe_yearly" = "Yıllık Abone Ol";
+"settings.pro.retry" = "Tekrar Dene";
+"settings.pro.savings_badge" = "En Avantajlı";
+"settings.pro.legal_disclaimer" = "Ödeme, satın almayı onayladığınızda Apple Kimliği hesabınızdan tahsil edilir. Abonelik, içinde bulunduğunuz dönem bitmeden en az 24 saat önce iptal edilmezse otomatik olarak yenilenir ve yenileme ücreti dönem bitiminden önceki 24 saat içinde alınır. Aboneliğinizi iPhone Ayarlar > Apple Kimliği > Abonelikler bölümünden istediğiniz zaman yönetebilir veya otomatik yenilemeyi kapatabilirsiniz.";
+"settings.pro.eula" = "Kullanım Koşulları (EULA)";
+"settings.pro.privacy" = "Gizlilik Politikası";
+"settings.pro.purchase_pending" = "Satın alma onay bekliyor (ör. Ekran Zamanı izni).";
+"settings.pro.purchase_failed" = "Satın alma tamamlanamadı: %@";
+"settings.pro.unavailable" = "Abonelik şu anda kullanılamıyor, lütfen daha sonra tekrar deneyin.";
+"settings.pro.restore_failed" = "Satın almalar geri yüklenemedi: %@";
+
+/* Ayarlar — Ezan Sesi */
+"settings.ezan_sound.section" = "Ezan Sesi";
+"settings.ezan_sound.enable" = "Ezan Sesini Çal";
+"settings.ezan_sound.style" = "Okuyuş / Makam";
+"settings.ezan_sound.explanation" = "Vakit girdiğinde bildirim yerine gerçek ezan sesi çalınır (uygulama açıkken tam uzunlukta, kapalıyken ilk 30 saniyesi).";
+"settings.ezan_sound.style.classic" = "Klasik";
+"settings.ezan_sound.style.hicaz" = "Hicaz Makamı";
+"settings.ezan_sound.style.saba" = "Saba Makamı";
+"settings.ezan_sound.style.rast" = "Rast Makamı";
+
+/* Ayarlar — Bildirimler */
+"settings.notifications.section" = "Ezan Vakti Bildirimleri";
+"settings.notifications.toggle" = "Bildirimleri Aç";
+"settings.notifications.permission_denied" = "Bildirim izni verilmedi. iPhone Ayarlar > Bildirimler > Kıble Bul bölümünden açabilirsiniz.";
+"settings.notifications.location_pending" = "Konum henüz alınamadı. Konum bulunduktan sonra tekrar deneyin.";
+"settings.notifications.scheduled" = "Önümüzdeki 7 gün için vakit bildirimleri kuruldu.";
+"settings.notifications.privacy_note" = "Bildirimler yalnızca cihazınızda hesaplanır; konumunuz hiçbir sunucuya gönderilmez.";
+
+/* Ayarlar — Hakkında */
+"settings.about.section" = "Hakkında";
+"settings.about.version" = "Sürüm";
+"settings.about.privacy" = "Gizlilik Politikası";
