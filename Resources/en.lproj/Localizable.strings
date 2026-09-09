@@ -1,0 +1,97 @@
+/* Tabs */
+"tab.compass" = "Compass";
+"tab.prayer_times" = "Times";
+"tab.camera" = "Camera";
+"tab.mosques" = "Mosques";
+"tab.settings" = "Settings";
+
+/* Compass screen */
+"compass.title" = "Kıble Bul";
+"compass.distance" = "Distance to Kaaba: %d km";
+"compass.status.permission_pending" = "Waiting for location permission…";
+"compass.status.permission_denied" = "Location permission denied — allow it in Settings";
+"compass.status.searching" = "Searching for location…";
+"compass.status.calibrating" = "Calibrating compass — wave your phone in a figure 8";
+"compass.status.ready" = "Ready";
+
+/* Camera (AR) screen */
+"camera.permission_required" = "Camera permission required";
+"camera.permission_explanation" = "You can enable camera access for Kıble Bul from the Settings app.";
+"camera.preparing" = "Preparing camera…";
+
+/* Mosques screen */
+"mosques.loading" = "Searching for mosques…";
+"mosques.error" = "Couldn't load mosques. Check your internet connection and try again.";
+"mosques.count" = "%d mosques found";
+"mosques.attribution" = "Mosque data © OpenStreetMap contributors";
+"mosques.title" = "Nearby Mosques";
+"mosque.unnamed" = "Unnamed Mosque";
+
+/* Prayer times screen */
+"prayer_times.next" = "Next prayer: %@";
+"prayer_times.today_section" = "Today's Times";
+"prayer_times.disclaimer" = "Times are calculated on your device based on your location (Turkey / Hanafi method). Small differences may occur in different cities.";
+"prayer_times.waiting_location" = "Waiting for location";
+"prayer_times.waiting_location_detail" = "Location permission is needed to calculate prayer times. Times will appear automatically once you grant permission.";
+"prayer_times.request_permission" = "Request Location Permission";
+"prayer_times.title" = "Prayer Times";
+
+/* Prayer names */
+"prayer.fajr" = "Fajr";
+"prayer.sunrise" = "Sunrise";
+"prayer.dhuhr" = "Dhuhr";
+"prayer.asr" = "Asr";
+"prayer.maghrib" = "Maghrib";
+"prayer.isha" = "Isha";
+
+/* Notifications */
+"notification.title" = "Kıble Bul";
+"notification.body" = "It's time for %@.";
+
+/* Settings — Kıble Pro */
+"settings.title" = "Settings";
+"settings.pro.section" = "Kıble Bul Pro";
+"settings.pro.active" = "Your subscription is active — ad-free";
+"settings.pro.manage" = "You can manage or cancel your subscription from iPhone Settings > Apple ID > Subscriptions.";
+"settings.pro.restore" = "Restore Purchases";
+"settings.pro.description" = "Removes all ads (bottom banner and launch ad) from the app. Every other feature works fully without a subscription.";
+"settings.pro.monthly_title" = "Kıble Pro Monthly";
+"settings.pro.yearly_title" = "Kıble Pro Yearly";
+"settings.pro.per_month" = "%@ / month";
+"settings.pro.per_year" = "%@ / year";
+"settings.pro.price_loading" = "Loading price…";
+"settings.pro.price_unavailable" = "Couldn't load the price right now. Check your internet connection and try again.";
+"settings.pro.subscribe_monthly" = "Subscribe Monthly";
+"settings.pro.subscribe_yearly" = "Subscribe Yearly";
+"settings.pro.retry" = "Try Again";
+"settings.pro.savings_badge" = "Best Value";
+"settings.pro.legal_disclaimer" = "Payment will be charged to your Apple ID account when you confirm the purchase. The subscription automatically renews unless cancelled at least 24 hours before the end of the current period, and the renewal fee is charged within 24 hours before the period ends. You can manage or turn off auto-renewal anytime from iPhone Settings > Apple ID > Subscriptions.";
+"settings.pro.eula" = "Terms of Use (EULA)";
+"settings.pro.privacy" = "Privacy Policy";
+"settings.pro.purchase_pending" = "Purchase awaiting approval (e.g. Screen Time restrictions).";
+"settings.pro.purchase_failed" = "Purchase couldn't be completed: %@";
+"settings.pro.unavailable" = "Subscription isn't available right now, please try again later.";
+"settings.pro.restore_failed" = "Purchases couldn't be restored: %@";
+
+/* Settings — Adhan Sound */
+"settings.ezan_sound.section" = "Adhan Sound";
+"settings.ezan_sound.enable" = "Play Adhan Sound";
+"settings.ezan_sound.style" = "Reciter / Maqam";
+"settings.ezan_sound.explanation" = "When a prayer time begins, a real adhan is played instead of the notification sound (full length while the app is open, first 30 seconds while closed).";
+"settings.ezan_sound.style.classic" = "Classic";
+"settings.ezan_sound.style.hicaz" = "Hijaz Maqam";
+"settings.ezan_sound.style.saba" = "Saba Maqam";
+"settings.ezan_sound.style.rast" = "Rast Maqam";
+
+/* Settings — Notifications */
+"settings.notifications.section" = "Prayer Time Notifications";
+"settings.notifications.toggle" = "Enable Notifications";
+"settings.notifications.permission_denied" = "Notification permission was denied. You can enable it from iPhone Settings > Notifications > Kıble Bul.";
+"settings.notifications.location_pending" = "Location isn't available yet. Try again once location is found.";
+"settings.notifications.scheduled" = "Prayer time notifications are set for the next 7 days.";
+"settings.notifications.privacy_note" = "Notifications are calculated only on your device; your location is never sent to any server.";
+
+/* Settings — About */
+"settings.about.section" = "About";
+"settings.about.version" = "Version";
+"settings.about.privacy" = "Privacy Policy";
