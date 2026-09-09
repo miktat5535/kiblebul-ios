@@ -1,0 +1,2 @@
+"NSLocationWhenInUseUsageDescription" = "Wir benötigen Ihren Standort, um die Qibla-Richtung zu bestimmen und die Gebetszeiten für Ihren Ort zu berechnen. Ihr Standort wird niemals an einen Server gesendet — er wird ausschließlich auf Ihrem Gerät verarbeitet.";
+"NSCameraUsageDescription" = "Wir benötigen Kamerazugriff, um die Qibla-Richtung über dem Live-Kamerabild anzuzeigen. Das Bild wird niemals aufgezeichnet oder irgendwohin gesendet.";
