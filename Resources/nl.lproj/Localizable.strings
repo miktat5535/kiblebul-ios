@@ -1,0 +1,96 @@
+/* Tabbladen */
+"tab.compass" = "Kompas";
+"tab.prayer_times" = "Tijden";
+"tab.camera" = "Camera";
+"tab.mosques" = "Moskeeën";
+"tab.settings" = "Instellingen";
+
+/* Kompasscherm */
+"compass.title" = "Kıble Bul";
+"compass.distance" = "Afstand tot de Kaäba: %d km";
+"compass.status.permission_pending" = "Wachten op locatietoestemming…";
+"compass.status.permission_denied" = "Locatietoegang geweigerd — sta dit toe via Instellingen";
+"compass.status.searching" = "Locatie zoeken…";
+"compass.status.calibrating" = "Kompas kalibreren — beweeg de telefoon in een 8-vorm";
+"compass.status.ready" = "Klaar";
+
+/* Camerascherm (AR) */
+"camera.permission_required" = "Cameratoegang vereist";
+"camera.permission_explanation" = "U kunt cameratoegang voor Kıble Bul inschakelen via de app Instellingen.";
+"camera.preparing" = "Camera wordt voorbereid…";
+
+/* Moskeeënscherm */
+"mosques.loading" = "Moskeeën zoeken…";
+"mosques.error" = "Moskeeën konden niet worden geladen. Controleer uw internetverbinding en probeer het opnieuw.";
+"mosques.count" = "%d moskeeën gevonden";
+"mosques.attribution" = "Moskeegegevens © OpenStreetMap-bijdragers";
+"mosques.title" = "Moskeeën in de buurt";
+"mosque.unnamed" = "Naamloze moskee";
+
+/* Gebedstijdenscherm */
+"prayer_times.next" = "Volgend gebed: %@";
+"prayer_times.today_section" = "Tijden van vandaag";
+"prayer_times.disclaimer" = "De tijden worden op uw apparaat berekend op basis van uw locatie (Turkije / hanafitische methode). Er kunnen kleine verschillen zijn per stad.";
+"prayer_times.waiting_location" = "Wachten op locatie";
+"prayer_times.waiting_location_detail" = "Locatietoestemming is nodig om gebedstijden te berekenen. De tijden verschijnen automatisch zodra u toestemming geeft.";
+"prayer_times.request_permission" = "Locatietoestemming aanvragen";
+"prayer_times.title" = "Gebedstijden";
+
+/* Gebedsnamen */
+"prayer.fajr" = "Fajr";
+"prayer.sunrise" = "Zonsopkomst";
+"prayer.dhuhr" = "Dhuhr";
+"prayer.asr" = "Asr";
+"prayer.maghrib" = "Maghrib";
+"prayer.isha" = "Isha";
+
+/* Meldingen */
+"notification.title" = "Kıble Bul";
+"notification.body" = "Het is tijd voor %@.";
+/* Instellingen — Kıble Pro */
+"settings.title" = "Instellingen";
+"settings.pro.section" = "Kıble Bul Pro";
+"settings.pro.active" = "Uw abonnement is actief — advertentievrij gebruik";
+"settings.pro.manage" = "U kunt uw abonnement beheren of opzeggen via iPhone-instellingen > Apple-ID > Abonnementen.";
+"settings.pro.restore" = "Aankopen herstellen";
+"settings.pro.description" = "Verwijdert alle advertenties (onderste banner en opstartadvertentie) uit de app. Alle andere functies werken volledig, ook zonder abonnement.";
+"settings.pro.monthly_title" = "Kıble Pro Maandelijks";
+"settings.pro.yearly_title" = "Kıble Pro Jaarlijks";
+"settings.pro.per_month" = "%@ / maand";
+"settings.pro.per_year" = "%@ / jaar";
+"settings.pro.price_loading" = "Prijs laden…";
+"settings.pro.price_unavailable" = "De prijs kon nu niet worden geladen. Controleer uw internetverbinding en probeer het opnieuw.";
+"settings.pro.subscribe_monthly" = "Maandelijks abonneren";
+"settings.pro.subscribe_yearly" = "Jaarlijks abonneren";
+"settings.pro.retry" = "Opnieuw proberen";
+"settings.pro.savings_badge" = "Beste keuze";
+"settings.pro.legal_disclaimer" = "Betaling wordt in rekening gebracht op uw Apple-ID-account zodra u de aankoop bevestigt. Het abonnement wordt automatisch verlengd, tenzij het minstens 24 uur voor het einde van de huidige periode wordt opgezegd; de verlengingskosten worden binnen 24 uur vóór het einde van de periode in rekening gebracht. U kunt uw abonnement op elk moment beheren of automatische verlenging uitschakelen via iPhone-instellingen > Apple-ID > Abonnementen.";
+"settings.pro.eula" = "Gebruiksvoorwaarden (EULA)";
+"settings.pro.privacy" = "Privacybeleid";
+"settings.pro.purchase_pending" = "Aankoop wacht op goedkeuring (bijv. Schermtijd-beperkingen).";
+"settings.pro.purchase_failed" = "Aankoop kon niet worden voltooid: %@";
+"settings.pro.unavailable" = "Abonnement is nu niet beschikbaar, probeer het later opnieuw.";
+"settings.pro.restore_failed" = "Aankopen konden niet worden hersteld: %@";
+
+/* Instellingen — Ezan-geluid */
+"settings.ezan_sound.section" = "Ezan-geluid";
+"settings.ezan_sound.enable" = "Ezan afspelen";
+"settings.ezan_sound.style" = "Voordrager / Maqam";
+"settings.ezan_sound.explanation" = "Wanneer een gebedstijd begint, wordt in plaats van het meldingsgeluid een echte ezan afgespeeld (volledig wanneer de app open is, de eerste 30 seconden wanneer deze gesloten is).";
+"settings.ezan_sound.style.classic" = "Klassiek";
+"settings.ezan_sound.style.hicaz" = "Hijaz-maqam";
+"settings.ezan_sound.style.saba" = "Saba-maqam";
+"settings.ezan_sound.style.rast" = "Rast-maqam";
+
+/* Instellingen — Meldingen */
+"settings.notifications.section" = "Gebedstijdmeldingen";
+"settings.notifications.toggle" = "Meldingen inschakelen";
+"settings.notifications.permission_denied" = "Meldingstoestemming is geweigerd. U kunt dit inschakelen via iPhone-instellingen > Meldingen > Kıble Bul.";
+"settings.notifications.location_pending" = "Locatie is nog niet beschikbaar. Probeer het opnieuw zodra de locatie is gevonden.";
+"settings.notifications.scheduled" = "Gebedstijdmeldingen zijn ingesteld voor de komende 7 dagen.";
+"settings.notifications.privacy_note" = "Meldingen worden alleen op uw apparaat berekend; uw locatie wordt nooit naar een server verzonden.";
+
+/* Instellingen — Over */
+"settings.about.section" = "Over";
+"settings.about.version" = "Versie";
+"settings.about.privacy" = "Privacybeleid";
