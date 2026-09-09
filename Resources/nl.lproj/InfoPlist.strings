@@ -1,0 +1,2 @@
+"NSLocationWhenInUseUsageDescription" = "We hebben uw locatie nodig om de qibla-richting te bepalen en de gebedstijden voor uw locatie te berekenen. Uw locatie wordt nooit naar een server verzonden — deze wordt uitsluitend op uw apparaat verwerkt.";
+"NSCameraUsageDescription" = "We hebben cameratoegang nodig om de qibla-richting over het live camerabeeld te tonen. Het beeld wordt nooit opgenomen of ergens naartoe verzonden.";
