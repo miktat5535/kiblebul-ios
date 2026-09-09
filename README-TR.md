@@ -2,8 +2,11 @@
 
 Bu depo, Kıble Bul'un iOS (iPhone) sürümünün tam kaynak kodunu içerir:
 kıble pusulası, kamera (AR) ekranı, yakındaki camiler haritası, ezan vakti
-bildirimleri, AdMob reklamları (banner + açılışta geçiş/interstitial) ve
-"Kıble Pro" aylık aboneliği (reklamsız kullanım).
+bildirimleri (gerçek ezan sesiyle, vakit ve makama göre), AdMob reklamları
+(banner + açılışta geçiş/interstitial), 9 dilde tam dil desteği (Türkçe,
+İngilizce, Arapça, Almanca, Fransızca, Hollandaca, Urduca, Endonezce, Rusça)
+ve "Kıble Pro" aboneliği (aylık + yıllık, reklamsız kullanım). Uygulamanın
+kendisi **ücretsiz**; sadece Kıble Pro isteğe bağlı bir abonelik.
 
 **Önemli:** iOS uygulamaları yalnızca Xcode ile ve yalnızca macOS'ta
 derlenip imzalanabilir. Windows'ta bunu yapamazsınız. Bu yüzden bu proje,
@@ -154,9 +157,123 @@ Codemagic'in ürettiği App Store derlemesi ise gerçek kimlikleri kullanır.
 | Kamera (AR) ekranı | ✅ | ✅ |
 | Yakındaki camiler haritası | ✅ (OSM Overpass) | ✅ (aynı API) |
 | Ezan vakti bildirimleri | ✅ | ✅ (Diyanet yöntemi, Adhan kütüphanesi) |
+| Gerçek ezan sesi (vakit + makama göre) | — | ✅ (Klasik / Hicaz / Saba / Rast) |
 | Banner reklam | ✅ | ✅ |
 | Geçiş (interstitial) reklam | — | ✅ (açılışta, 4 saatte bir sınırlı) |
-| Kıble Pro (reklamsız) | ✅ Google Play Billing | ✅ StoreKit 2, 9,90 TL/ay |
+| Kıble Pro (reklamsız) | ✅ Google Play Billing | ✅ StoreKit 2 — Aylık ₺29,90, Yıllık ₺199,99 (3 gün ücretsiz deneme) |
+| Dil desteği | Sadece Türkçe | 9 dil (tr, en, ar, de, fr, nl, ur, id, ru) |
+
+---
+
+## 8. Dil Desteği (Localization)
+
+Uygulama artık 9 dilde tam olarak yerelleştirilmiş durumda: **Türkçe**
+(temel/geliştirme dili), **İngilizce, Arapça, Almanca, Fransızca,
+Hollandaca, Urduca, Endonezce, Rusça** — yani Avrupa'da veya başka bir
+ülkede yaşayan bir Müslüman, telefonunun sistem dili bu 9 dilden biriyse
+uygulamayı otomatik olarak kendi dilinde görür (App Store'un standart
+`.lproj` mekanizması sayesinde, kod tarafında ekstra bir şey yapmaya
+gerek yok — iOS, cihazın dil ayarına göre doğru `Localizable.strings`
+dosyasını kendisi seçer).
+
+Bu diller özellikle **Müslüman nüfusun yoğun olduğu ülke/bölgelerdeki**
+en yaygın diller göz önünde bulundurularak seçildi (Arapça: Orta Doğu/
+Kuzey Afrika, Urduca: Pakistan, Endonezce: Endonezya — dünyanın en kalabalık
+Müslüman nüfusuna sahip ülkesi, Rusça: Orta Asya/Kafkasya, Almanca/Fransızca/
+Hollandaca: Avrupa'daki büyük Türk/Müslüman diasporası).
+
+**Yeni bir dil eklemek isterseniz:**
+
+1. `Resources/` altında yeni bir `<dil kodu>.lproj` klasörü açın (ör.
+   İspanyolca için `es.lproj`).
+2. İçine, mevcut `en.lproj/Localizable.strings` dosyasını şablon alarak
+   tüm anahtarları o dile çevirip aynı isimle kaydedin
+   (`Localizable.strings`), aynı şekilde `InfoPlist.strings` dosyasını da
+   (2 anahtar: `NSLocationWhenInUseUsageDescription`,
+   `NSCameraUsageDescription`) ekleyin.
+3. `project.yml` dosyasında hem `targets.KibleBul.sources:` listesine
+   `- path: Resources/es.lproj` satırını, hem de
+   `info.properties.CFBundleLocalizations` listesine `es` değerini ekleyin.
+4. `xcodegen generate` çalıştırıp yeniden derleyin (bkz. Adım 4).
+
+App Store Connect'teki uygulama **mağaza listelemesi** (isim/açıklama/
+ekran görüntüleri) ayrı bir konudur ve şu an sadece Türkçe — isterseniz
+ileride App Store Connect → App Information → Localizations kısmından
+mağaza sayfasını da çevirebilirsiniz, ama bu App Store'da onay için
+zorunlu değil; uygulamanın kendisinin dil desteğiyle gelmesi (yukarıdaki
+adımlarla zaten tamam) çok daha önemli.
+
+---
+
+## 9. Ezan Sesi Ekleme
+
+Kod, nöbetçi (foreground) ve bildirim (background) modlarında **gerçek
+ezan sesi** çalabilecek şekilde hazır (`Sources/Managers/AdhanPlayer.swift`)
+ve Ayarlar ekranında 4 "makam" (okuyuş tarzı) seçeneği sunuyor: **Klasik,
+Hicaz, Saba, Rast**. Ancak **telif hakkı nedeniyle ses dosyalarının
+kendisi bu depoya dahil edilmedi** — belirli bir müezzinin kayıtlı
+okuyuşunu izinsiz kullanmamak için bilinçli olarak boş bırakıldı. Ses
+dosyalarını siz eklemelisiniz.
+
+### Gerekli dosya adları ve formatlar
+
+Her makam için **iki ayrı dosya** eklemeniz gerekiyor — biri uygulama
+açıkken çalınan tam uzunluktaki ezan, diğeri uygulama kapalıyken bildirim
+sesi olarak çalınan kısa (≤30 saniye) versiyon:
+
+| Makam | Tam ezan dosyası (uygulama açıkken) | Bildirim sesi (uygulama kapalıyken, ≤30 sn) |
+|---|---|---|
+| Klasik | `adhan_classic.m4a` (veya `.mp3`/`.wav`/`.aiff`/`.caf`) | `adhan_classic_notification.caf` (veya `.aiff`/`.wav`) |
+| Hicaz | `adhan_makam_hicaz.m4a` | `adhan_makam_hicaz_notification.caf` |
+| Saba | `adhan_makam_saba.m4a` | `adhan_makam_saba_notification.caf` |
+| Rast | `adhan_makam_rast.m4a` | `adhan_makam_rast_notification.caf` |
+
+**Önemli iOS kısıtlamaları (kod bunları zaten bekliyor):**
+
+- Bildirim sesi dosyaları **yalnızca** `.caf`, `.aiff` veya `.wav`
+  olabilir (`.mp3`/`.m4a` bildirimde çalışmaz) ve **30 saniyeyi
+  geçemez** — iOS bundan uzun dosyaları sessizce görmezden gelip
+  varsayılan sesi çalar.
+- Tam uzunluktaki dosyalar (uygulama açıkken `AVAudioPlayer` ile
+  çalınır) için süre sınırı yoktur, `.m4a`/`.mp3`/`.wav`/`.aiff`/`.caf`
+  hepsi çalışır.
+- Tüm ses dosyalarını `Resources/Sounds/` klasörüne koyun (bu klasör
+  zaten `project.yml`'de kaynak olarak tanımlı). `.mp3`/`.wav` gibi bir
+  formatı `.caf`'a çevirmek için macOS'ta ücretsiz `afconvert` aracını
+  kullanabilirsiniz, örnek:
+  ```bash
+  afconvert -f caff -d ima4 adhan_classic_kisa.wav adhan_classic_notification.caf
+  ```
+
+Dosyalar eksik olsa bile uygulama **çökmez** — `AdhanPlayer` sessizce
+çalmayı atlar (`lastPlaybackFailed` bayrağı işaretlenir) ve bildirimler
+normal varsayılan sesle çalmaya devam eder; yani ses dosyalarını daha
+sonra, App Store'a ilk gönderimden sonra da ekleyebilirsiniz.
+
+### Nereden lisanslı/telifsiz ezan sesi bulabilirsiniz
+
+Kullanıcının özel talebi üzerine ("meşhur bir müezzinin kaydını izinsiz
+kullanma"), aşağıdaki iki kaynak **serbest lisanslı** ezan kayıtları
+barındırıyor — indirmeden önce her dosyanın kendi lisans/atıf şartını
+mutlaka kontrol edin:
+
+- **Wikimedia Commons — [Category:Adhan](https://commons.wikimedia.org/wiki/Category:Adhan):**
+  Creative Commons veya kamu malı (public domain) lisanslı birden fazla
+  ezan kaydı barındırıyor. Her dosyanın sayfasında tam lisans metni ve
+  gerekiyorsa atıf (attribution) bilgisi yazılıdır.
+- **Pixabay ([pixabay.com](https://pixabay.com), "azan"/"adhan" araması):**
+  Pixabay'in kendi "Content License"ı ile sunulan, atıf gerektirmeyen,
+  ticari kullanıma uygun telifsiz ses efektleri var. Adaylar arasında
+  "morning_azan" (0:48), "Call to Prayer at Marina Mall" (4:21), "Azan
+  Over Marble 2" (0:10) gibi kayıtlar bulunuyor — süresine ve okuyuş
+  tarzına göre size uygun olanı seçip indirebilir, "Klasik" makamı için
+  kullanabilirsiniz.
+
+Dört farklı makam (Hicaz/Saba/Rast) için ayrı ayrı kayıt bulmak zor
+olabilir; bulamadığınız makamlar için şimdilik aynı dosyayı birden fazla
+makam adıyla kopyalayabilir (ör. `adhan_makam_hicaz.m4a` olarak da aynı
+kaydı kullanabilirsiniz), sonradan gerçek makam kayıtları bulduğunuzda
+değiştirirsiniz — kod tarafında ekstra bir değişiklik gerekmez.
 
 ---
 

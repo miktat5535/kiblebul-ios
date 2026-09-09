@@ -23,6 +23,23 @@ targets:
     sources:
       - path: Sources
       - path: Resources/Assets.xcassets
+      - path: Resources/tr.lproj
+      - path: Resources/en.lproj
+      - path: Resources/ar.lproj
+      - path: Resources/de.lproj
+      - path: Resources/fr.lproj
+      - path: Resources/nl.lproj
+      - path: Resources/ur.lproj
+      - path: Resources/id.lproj
+      - path: Resources/ru.lproj
+      - path: Resources/Sounds
+        # "group" (varsayılan) olarak eklenir, "folder reference" DEĞİL:
+        # bu sayede içine konan ses dosyaları (ör. adhan_classic_notification.caf)
+        # uygulama paketinin KÖKÜNE düz olarak kopyalanır. UNNotificationSound(named:)
+        # bir alt klasör yolunu kabul etmez — sadece bu şekilde çalışır. Bu ayarı
+        # değiştirmeyin (bkz. AdhanPlayer.swift + README-TR.md "Ezan Sesi Ekleme").
+        type: group
+        optional: true
     info:
       path: Sources/Info.plist
       properties:
@@ -30,6 +47,22 @@ targets:
         CFBundleIconName: "AppIcon"
         CFBundleShortVersionString: "1.0"
         CFBundleVersion: "5"
+        # Dil desteği: uygulama Türkçe'yi temel dil olarak kullanır, geri kalan
+        # 8 dil aşağıdaki listede tanımlıdır. Her .lproj klasöründeki
+        # Localizable.strings / InfoPlist.strings dosyaları XcodeGen tarafından
+        # otomatik olarak "Localized Resource" olarak paketlenir çünkü klasör adı
+        # "<dil kodu>.lproj" biçimindedir (Apple kuralı).
+        CFBundleDevelopmentRegion: tr
+        CFBundleLocalizations:
+          - tr
+          - en
+          - ar
+          - de
+          - fr
+          - nl
+          - ur
+          - id
+          - ru
         UILaunchScreen: {}
         UISupportedInterfaceOrientations:
           - UIInterfaceOrientationPortrait
