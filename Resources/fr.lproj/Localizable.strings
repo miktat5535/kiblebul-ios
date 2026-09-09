@@ -1,0 +1,96 @@
+/* Onglets */
+"tab.compass" = "Boussole";
+"tab.prayer_times" = "Horaires";
+"tab.camera" = "Caméra";
+"tab.mosques" = "Mosquées";
+"tab.settings" = "Réglages";
+
+/* Écran boussole */
+"compass.title" = "Kıble Bul";
+"compass.distance" = "Distance jusqu'à la Kaaba : %d km";
+"compass.status.permission_pending" = "En attente de l'autorisation de localisation…";
+"compass.status.permission_denied" = "Autorisation de localisation refusée — activez-la dans Réglages";
+"compass.status.searching" = "Recherche de la position…";
+"compass.status.calibrating" = "Calibrage de la boussole — dessinez un 8 avec le téléphone";
+"compass.status.ready" = "Prêt";
+
+/* Écran caméra (RA) */
+"camera.permission_required" = "Autorisation caméra requise";
+"camera.permission_explanation" = "Vous pouvez activer l'accès à la caméra pour Kıble Bul depuis l'app Réglages.";
+"camera.preparing" = "Préparation de la caméra…";
+
+/* Écran mosquées */
+"mosques.loading" = "Recherche de mosquées…";
+"mosques.error" = "Impossible de charger les mosquées. Vérifiez votre connexion internet et réessayez.";
+"mosques.count" = "%d mosquées trouvées";
+"mosques.attribution" = "Données des mosquées © contributeurs OpenStreetMap";
+"mosques.title" = "Mosquées à proximité";
+"mosque.unnamed" = "Mosquée sans nom";
+
+/* Écran horaires de prière */
+"prayer_times.next" = "Prochaine prière : %@";
+"prayer_times.today_section" = "Horaires du jour";
+"prayer_times.disclaimer" = "Les horaires sont calculés sur votre appareil selon votre position (méthode Turquie / hanafite). De légères différences peuvent apparaître selon les villes.";
+"prayer_times.waiting_location" = "En attente de la position";
+"prayer_times.waiting_location_detail" = "L'autorisation de localisation est nécessaire pour calculer les horaires de prière. Les horaires apparaîtront automatiquement une fois l'autorisation accordée.";
+"prayer_times.request_permission" = "Demander l'autorisation de localisation";
+"prayer_times.title" = "Horaires de prière";
+
+/* Noms des prières */
+"prayer.fajr" = "Fajr";
+"prayer.sunrise" = "Lever du soleil";
+"prayer.dhuhr" = "Dhuhr";
+"prayer.asr" = "Asr";
+"prayer.maghrib" = "Maghrib";
+"prayer.isha" = "Isha";
+
+/* Notifications */
+"notification.title" = "Kıble Bul";
+"notification.body" = "C'est l'heure de %@.";
+/* Réglages — Kıble Pro */
+"settings.title" = "Réglages";
+"settings.pro.section" = "Kıble Bul Pro";
+"settings.pro.active" = "Votre abonnement est actif — utilisation sans publicité";
+"settings.pro.manage" = "Vous pouvez gérer ou annuler votre abonnement depuis Réglages iPhone > Identifiant Apple > Abonnements.";
+"settings.pro.restore" = "Restaurer les achats";
+"settings.pro.description" = "Supprime toutes les publicités (bannière du bas et publicité de lancement) de l'application. Toutes les autres fonctionnalités fonctionnent pleinement sans abonnement.";
+"settings.pro.monthly_title" = "Kıble Pro Mensuel";
+"settings.pro.yearly_title" = "Kıble Pro Annuel";
+"settings.pro.per_month" = "%@ / mois";
+"settings.pro.per_year" = "%@ / an";
+"settings.pro.price_loading" = "Chargement du prix…";
+"settings.pro.price_unavailable" = "Impossible de charger le prix pour le moment. Vérifiez votre connexion internet et réessayez.";
+"settings.pro.subscribe_monthly" = "S'abonner mensuellement";
+"settings.pro.subscribe_yearly" = "S'abonner annuellement";
+"settings.pro.retry" = "Réessayer";
+"settings.pro.savings_badge" = "Meilleure offre";
+"settings.pro.legal_disclaimer" = "Le paiement sera débité de votre compte Identifiant Apple à la confirmation de l'achat. L'abonnement se renouvelle automatiquement sauf annulation au moins 24 heures avant la fin de la période en cours ; les frais de renouvellement sont prélevés dans les 24 heures précédant la fin de la période. Vous pouvez gérer votre abonnement ou désactiver le renouvellement automatique à tout moment depuis Réglages iPhone > Identifiant Apple > Abonnements.";
+"settings.pro.eula" = "Conditions d'utilisation (CLUF)";
+"settings.pro.privacy" = "Politique de confidentialité";
+"settings.pro.purchase_pending" = "Achat en attente d'approbation (ex. restrictions Temps d'écran).";
+"settings.pro.purchase_failed" = "L'achat n'a pas pu être finalisé : %@";
+"settings.pro.unavailable" = "L'abonnement n'est pas disponible pour le moment, veuillez réessayer plus tard.";
+"settings.pro.restore_failed" = "Les achats n'ont pas pu être restaurés : %@";
+
+/* Réglages — Son de l'appel à la prière */
+"settings.ezan_sound.section" = "Son de l'appel à la prière";
+"settings.ezan_sound.enable" = "Jouer l'appel à la prière";
+"settings.ezan_sound.style" = "Récitateur / Maqam";
+"settings.ezan_sound.explanation" = "Au début d'une prière, un véritable appel à la prière est joué à la place du son de notification (intégral quand l'app est ouverte, 30 premières secondes quand elle est fermée).";
+"settings.ezan_sound.style.classic" = "Classique";
+"settings.ezan_sound.style.hicaz" = "Maqam Hijaz";
+"settings.ezan_sound.style.saba" = "Maqam Saba";
+"settings.ezan_sound.style.rast" = "Maqam Rast";
+
+/* Réglages — Notifications */
+"settings.notifications.section" = "Notifications des horaires de prière";
+"settings.notifications.toggle" = "Activer les notifications";
+"settings.notifications.permission_denied" = "L'autorisation de notification a été refusée. Vous pouvez l'activer depuis Réglages iPhone > Notifications > Kıble Bul.";
+"settings.notifications.location_pending" = "La position n'est pas encore disponible. Réessayez une fois la position trouvée.";
+"settings.notifications.scheduled" = "Les notifications d'horaires de prière sont programmées pour les 7 prochains jours.";
+"settings.notifications.privacy_note" = "Les notifications sont calculées uniquement sur votre appareil ; votre position n'est jamais envoyée à un serveur.";
+
+/* Réglages — À propos */
+"settings.about.section" = "À propos";
+"settings.about.version" = "Version";
+"settings.about.privacy" = "Politique de confidentialité";
