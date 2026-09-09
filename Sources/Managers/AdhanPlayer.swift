@@ -109,7 +109,7 @@ final class AdhanPlayer: NSObject, ObservableObject {
     /// olmadığını kontrol eder. iOS kuralı: yalnızca .caf/.aiff/.wav,
     /// en fazla 30 saniye, dosya paket köküne eklenmiş olmalı.
     /// Bulunamazsa `nil` döner ve sistemin varsayılan bildirim sesi kullanılır.
-    static func notificationSoundFileName(for style: ReciterStyle) -> String? {
+    nonisolated static func notificationSoundFileName(for style: ReciterStyle) -> String? {
         let candidate = "\(style.assetBaseName)_notification"
         for ext in ["caf", "aiff", "wav"] {
             if Bundle.main.url(forResource: candidate, withExtension: ext) != nil {
