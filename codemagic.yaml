@@ -1,8 +1,8 @@
 # Codemagic CI/CD yapılandırması — Kıble Bul (iOS)
 #
 # Kod imzalama, Codemagic'te KALICI olarak saklanan kimliklerle yapılır:
-#   - Sertifika:  kiblebul_distribution      (Apple Distribution)
-#   - Profil:     kiblebul_appstore_profile  (App Store, com.miktat55.kiblebul)
+#   - Sertifika:  kiblebul_distribution_2026      (Apple Distribution)
+#   - Profil:     kiblebul_appstore_profile_2026  (App Store, com.miktat55.kiblebul)
 #
 # Bu sayede her derlemede Apple'da yeni sertifika oluşturulmaz; Apple'ın
 # "en fazla 3 dağıtım sertifikası" sınırına takılma sorunu ortadan kalkar.
@@ -20,9 +20,9 @@ workflows:
         XCODE_SCHEME: "KibleBul"
       ios_signing:
         provisioning_profiles:
-          - kiblebul_appstore_profile
+          - kiblebul_appstore_profile_2026
         certificates:
-          - kiblebul_distribution
+          - kiblebul_distribution_2026
     integrations:
       app_store_connect: app_store_connect
 
