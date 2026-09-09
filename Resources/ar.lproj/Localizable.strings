@@ -1,0 +1,96 @@
+/* التبويبات */
+"tab.compass" = "البوصلة";
+"tab.prayer_times" = "الأوقات";
+"tab.camera" = "الكاميرا";
+"tab.mosques" = "المساجد";
+"tab.settings" = "الإعدادات";
+
+/* شاشة البوصلة */
+"compass.title" = "Kıble Bul";
+"compass.distance" = "المسافة إلى الكعبة: %d كم";
+"compass.status.permission_pending" = "بانتظار إذن الموقع…";
+"compass.status.permission_denied" = "تم رفض إذن الموقع — يرجى السماح به من الإعدادات";
+"compass.status.searching" = "جارٍ تحديد الموقع…";
+"compass.status.calibrating" = "جارٍ معايرة البوصلة — حرّك الهاتف على شكل رقم 8";
+"compass.status.ready" = "جاهز";
+
+/* شاشة الكاميرا (الواقع المعزز) */
+"camera.permission_required" = "إذن الكاميرا مطلوب";
+"camera.permission_explanation" = "يمكنك تفعيل إذن الكاميرا لتطبيق Kıble Bul من تطبيق الإعدادات.";
+"camera.preparing" = "جارٍ تجهيز الكاميرا…";
+
+/* شاشة المساجد */
+"mosques.loading" = "جارٍ البحث عن المساجد…";
+"mosques.error" = "تعذّر تحميل المساجد. تحقق من اتصالك بالإنترنت وحاول مرة أخرى.";
+"mosques.count" = "تم العثور على %d مسجد";
+"mosques.attribution" = "بيانات المساجد © مساهمو OpenStreetMap";
+"mosques.title" = "المساجد القريبة";
+"mosque.unnamed" = "مسجد بدون اسم";
+
+/* شاشة أوقات الصلاة */
+"prayer_times.next" = "الصلاة القادمة: %@";
+"prayer_times.today_section" = "أوقات اليوم";
+"prayer_times.disclaimer" = "تُحسب الأوقات على جهازك حسب موقعك (طريقة تركيا / المذهب الحنفي). قد تحدث فروق طفيفة في مدن مختلفة.";
+"prayer_times.waiting_location" = "بانتظار الموقع";
+"prayer_times.waiting_location_detail" = "إذن الموقع مطلوب لحساب أوقات الصلاة. ستظهر الأوقات تلقائيًا بعد منح الإذن.";
+"prayer_times.request_permission" = "طلب إذن الموقع";
+"prayer_times.title" = "أوقات الصلاة";
+
+/* أسماء الصلوات */
+"prayer.fajr" = "الفجر";
+"prayer.sunrise" = "الشروق";
+"prayer.dhuhr" = "الظهر";
+"prayer.asr" = "العصر";
+"prayer.maghrib" = "المغرب";
+"prayer.isha" = "العشاء";
+
+/* الإشعارات */
+"notification.title" = "Kıble Bul";
+"notification.body" = "حان وقت %@.";
+/* الإعدادات — Kıble Pro */
+"settings.title" = "الإعدادات";
+"settings.pro.section" = "Kıble Bul Pro";
+"settings.pro.active" = "اشتراكك نشط — استخدام بدون إعلانات";
+"settings.pro.manage" = "يمكنك إدارة اشتراكك أو إلغاءه من إعدادات iPhone > Apple ID > الاشتراكات.";
+"settings.pro.restore" = "استعادة المشتريات";
+"settings.pro.description" = "يزيل جميع الإعلانات (الشريط السفلي وإعلان البدء) من التطبيق. جميع الميزات الأخرى تعمل بالكامل بدون اشتراك.";
+"settings.pro.monthly_title" = "Kıble Pro شهري";
+"settings.pro.yearly_title" = "Kıble Pro سنوي";
+"settings.pro.per_month" = "%@ / شهريًا";
+"settings.pro.per_year" = "%@ / سنويًا";
+"settings.pro.price_loading" = "جارٍ تحميل السعر…";
+"settings.pro.price_unavailable" = "تعذّر تحميل السعر حاليًا. تحقق من اتصالك بالإنترنت وحاول مرة أخرى.";
+"settings.pro.subscribe_monthly" = "اشترك شهريًا";
+"settings.pro.subscribe_yearly" = "اشترك سنويًا";
+"settings.pro.retry" = "أعد المحاولة";
+"settings.pro.savings_badge" = "الأفضل قيمةً";
+"settings.pro.legal_disclaimer" = "سيتم خصم المبلغ من حساب Apple ID عند تأكيد الشراء. يتجدد الاشتراك تلقائيًا ما لم يتم إلغاؤه قبل 24 ساعة على الأقل من نهاية الفترة الحالية، ويتم تحصيل رسوم التجديد خلال 24 ساعة قبل انتهاء الفترة. يمكنك إدارة اشتراكك أو إيقاف التجديد التلقائي في أي وقت من إعدادات iPhone > Apple ID > الاشتراكات.";
+"settings.pro.eula" = "شروط الاستخدام (EULA)";
+"settings.pro.privacy" = "سياسة الخصوصية";
+"settings.pro.purchase_pending" = "عملية الشراء بانتظار الموافقة (مثل قيود وقت الشاشة).";
+"settings.pro.purchase_failed" = "تعذّر إتمام الشراء: %@";
+"settings.pro.unavailable" = "الاشتراك غير متاح حاليًا، يرجى المحاولة لاحقًا.";
+"settings.pro.restore_failed" = "تعذّرت استعادة المشتريات: %@";
+
+/* الإعدادات — صوت الأذان */
+"settings.ezan_sound.section" = "صوت الأذان";
+"settings.ezan_sound.enable" = "تشغيل صوت الأذان";
+"settings.ezan_sound.style" = "القارئ / المقام";
+"settings.ezan_sound.explanation" = "عند دخول الوقت، يُشغَّل أذان حقيقي بدلًا من صوت الإشعار (كاملًا عند فتح التطبيق، وأول 30 ثانية عند إغلاقه).";
+"settings.ezan_sound.style.classic" = "كلاسيكي";
+"settings.ezan_sound.style.hicaz" = "مقام الحجاز";
+"settings.ezan_sound.style.saba" = "مقام الصبا";
+"settings.ezan_sound.style.rast" = "مقام الراست";
+
+/* الإعدادات — الإشعارات */
+"settings.notifications.section" = "إشعارات أوقات الصلاة";
+"settings.notifications.toggle" = "تفعيل الإشعارات";
+"settings.notifications.permission_denied" = "تم رفض إذن الإشعارات. يمكنك تفعيله من إعدادات iPhone > الإشعارات > Kıble Bul.";
+"settings.notifications.location_pending" = "الموقع غير متاح بعد. حاول مرة أخرى بعد تحديد الموقع.";
+"settings.notifications.scheduled" = "تم ضبط إشعارات أوقات الصلاة لمدة 7 أيام القادمة.";
+"settings.notifications.privacy_note" = "تُحسب الإشعارات على جهازك فقط؛ لا يُرسل موقعك إلى أي خادم.";
+
+/* الإعدادات — حول */
+"settings.about.section" = "حول";
+"settings.about.version" = "الإصدار";
+"settings.about.privacy" = "سياسة الخصوصية";
