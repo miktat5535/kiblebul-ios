@@ -1,0 +1,96 @@
+/* ٹیبز */
+"tab.compass" = "قطب نما";
+"tab.prayer_times" = "اوقات";
+"tab.camera" = "کیمرہ";
+"tab.mosques" = "مساجد";
+"tab.settings" = "ترتیبات";
+
+/* قطب نما اسکرین */
+"compass.title" = "Kıble Bul";
+"compass.distance" = "کعبہ سے فاصلہ: %d کلومیٹر";
+"compass.status.permission_pending" = "مقام کی اجازت کا انتظار…";
+"compass.status.permission_denied" = "مقام کی اجازت مسترد — براہ کرم ترتیبات میں اجازت دیں";
+"compass.status.searching" = "مقام تلاش کیا جا رہا ہے…";
+"compass.status.calibrating" = "قطب نما کیلیبریٹ ہو رہا ہے — فون کو 8 کی شکل میں گھمائیں";
+"compass.status.ready" = "تیار";
+
+/* کیمرہ (AR) اسکرین */
+"camera.permission_required" = "کیمرے کی اجازت درکار ہے";
+"camera.permission_explanation" = "آپ ترتیبات ایپ سے Kıble Bul کے لیے کیمرے کی اجازت فعال کر سکتے ہیں۔";
+"camera.preparing" = "کیمرہ تیار ہو رہا ہے…";
+
+/* مساجد اسکرین */
+"mosques.loading" = "مساجد تلاش کی جا رہی ہیں…";
+"mosques.error" = "مساجد لوڈ نہیں ہو سکیں۔ اپنا انٹرنیٹ کنکشن چیک کریں اور دوبارہ کوشش کریں۔";
+"mosques.count" = "%d مساجد ملیں";
+"mosques.attribution" = "مسجد کا ڈیٹا © OpenStreetMap تعاون کنندگان";
+"mosques.title" = "قریبی مساجد";
+"mosque.unnamed" = "بے نام مسجد";
+
+/* نماز کے اوقات اسکرین */
+"prayer_times.next" = "اگلی نماز: %@";
+"prayer_times.today_section" = "آج کے اوقات";
+"prayer_times.disclaimer" = "اوقات آپ کے مقام کی بنیاد پر آپ کے آلے پر حساب کیے جاتے ہیں (ترکی / حنفی طریقہ)۔ مختلف شہروں میں معمولی فرق ہو سکتا ہے۔";
+"prayer_times.waiting_location" = "مقام کا انتظار";
+"prayer_times.waiting_location_detail" = "نماز کے اوقات کا حساب لگانے کے لیے مقام کی اجازت درکار ہے۔ اجازت دینے کے بعد اوقات خود بخود ظاہر ہوں گے۔";
+"prayer_times.request_permission" = "مقام کی اجازت طلب کریں";
+"prayer_times.title" = "نماز کے اوقات";
+
+/* نمازوں کے نام */
+"prayer.fajr" = "فجر";
+"prayer.sunrise" = "طلوعِ آفتاب";
+"prayer.dhuhr" = "ظہر";
+"prayer.asr" = "عصر";
+"prayer.maghrib" = "مغرب";
+"prayer.isha" = "عشاء";
+
+/* اطلاعات */
+"notification.title" = "Kıble Bul";
+"notification.body" = "%@ کا وقت ہو گیا ہے۔";
+/* ترتیبات — Kıble Pro */
+"settings.title" = "ترتیبات";
+"settings.pro.section" = "Kıble Bul Pro";
+"settings.pro.active" = "آپ کی رکنیت فعال ہے — بغیر اشتہار استعمال";
+"settings.pro.manage" = "آپ اپنی رکنیت کو iPhone ترتیبات > Apple ID > رکنیتیں سے منظم یا منسوخ کر سکتے ہیں۔";
+"settings.pro.restore" = "خریداریاں بحال کریں";
+"settings.pro.description" = "ایپ سے تمام اشتہارات (نیچے کا بینر اور آغاز کا اشتہار) ہٹا دیتا ہے۔ ایپ کی باقی تمام خصوصیات رکنیت کے بغیر بھی مکمل طور پر کام کرتی ہیں۔";
+"settings.pro.monthly_title" = "Kıble Pro ماہانہ";
+"settings.pro.yearly_title" = "Kıble Pro سالانہ";
+"settings.pro.per_month" = "%@ / ماہ";
+"settings.pro.per_year" = "%@ / سال";
+"settings.pro.price_loading" = "قیمت لوڈ ہو رہی ہے…";
+"settings.pro.price_unavailable" = "قیمت اس وقت لوڈ نہیں ہو سکی۔ اپنا انٹرنیٹ کنکشن چیک کریں اور دوبارہ کوشش کریں۔";
+"settings.pro.subscribe_monthly" = "ماہانہ رکنیت لیں";
+"settings.pro.subscribe_yearly" = "سالانہ رکنیت لیں";
+"settings.pro.retry" = "دوبارہ کوشش کریں";
+"settings.pro.savings_badge" = "بہترین قیمت";
+"settings.pro.legal_disclaimer" = "خریداری کی تصدیق کے وقت ادائیگی آپ کے Apple ID اکاؤنٹ سے کاٹی جائے گی۔ رکنیت خودکار طور پر تجدید ہوتی ہے جب تک کہ موجودہ مدت ختم ہونے سے کم از کم 24 گھنٹے پہلے منسوخ نہ کی جائے، اور تجدید کی فیس مدت ختم ہونے سے 24 گھنٹے پہلے کاٹی جاتی ہے۔ آپ کسی بھی وقت iPhone ترتیبات > Apple ID > رکنیتیں سے اپنی رکنیت منظم کر سکتے ہیں یا خودکار تجدید بند کر سکتے ہیں۔";
+"settings.pro.eula" = "استعمال کی شرائط (EULA)";
+"settings.pro.privacy" = "رازداری کی پالیسی";
+"settings.pro.purchase_pending" = "خریداری منظوری کے منتظر ہے (مثلاً اسکرین ٹائم کی پابندیاں)۔";
+"settings.pro.purchase_failed" = "خریداری مکمل نہیں ہو سکی: %@";
+"settings.pro.unavailable" = "رکنیت اس وقت دستیاب نہیں، براہ کرم بعد میں دوبارہ کوشش کریں۔";
+"settings.pro.restore_failed" = "خریداریاں بحال نہیں ہو سکیں: %@";
+
+/* ترتیبات — اذان کی آواز */
+"settings.ezan_sound.section" = "اذان کی آواز";
+"settings.ezan_sound.enable" = "اذان چلائیں";
+"settings.ezan_sound.style" = "قاری / مقام";
+"settings.ezan_sound.explanation" = "جب نماز کا وقت شروع ہو تو اطلاع کی آواز کے بجائے حقیقی اذان چلائی جاتی ہے (ایپ کھلی ہونے پر مکمل، بند ہونے پر پہلے 30 سیکنڈ)۔";
+"settings.ezan_sound.style.classic" = "کلاسیک";
+"settings.ezan_sound.style.hicaz" = "مقامِ حجاز";
+"settings.ezan_sound.style.saba" = "مقامِ صبا";
+"settings.ezan_sound.style.rast" = "مقامِ راست";
+
+/* ترتیبات — اطلاعات */
+"settings.notifications.section" = "نماز کے اوقات کی اطلاعات";
+"settings.notifications.toggle" = "اطلاعات فعال کریں";
+"settings.notifications.permission_denied" = "اطلاع کی اجازت مسترد کر دی گئی۔ آپ اسے iPhone ترتیبات > اطلاعات > Kıble Bul سے فعال کر سکتے ہیں۔";
+"settings.notifications.location_pending" = "مقام ابھی دستیاب نہیں۔ مقام ملنے کے بعد دوبارہ کوشش کریں۔";
+"settings.notifications.scheduled" = "اگلے 7 دنوں کے لیے نماز کے اوقات کی اطلاعات مقرر کر دی گئی ہیں۔";
+"settings.notifications.privacy_note" = "اطلاعات صرف آپ کے آلے پر حساب کی جاتی ہیں؛ آپ کا مقام کبھی بھی کسی سرور کو نہیں بھیجا جاتا۔";
+
+/* ترتیبات — تعارف */
+"settings.about.section" = "تعارف";
+"settings.about.version" = "ورژن";
+"settings.about.privacy" = "رازداری کی پالیسی";
