@@ -1,0 +1,96 @@
+/* Tab */
+"tab.compass" = "Kompas";
+"tab.prayer_times" = "Waktu Salat";
+"tab.camera" = "Kamera";
+"tab.mosques" = "Masjid";
+"tab.settings" = "Pengaturan";
+
+/* Layar Kompas */
+"compass.title" = "Kıble Bul";
+"compass.distance" = "Jarak ke Ka'bah: %d km";
+"compass.status.permission_pending" = "Menunggu izin lokasi…";
+"compass.status.permission_denied" = "Izin lokasi ditolak — aktifkan melalui Pengaturan";
+"compass.status.searching" = "Mencari lokasi…";
+"compass.status.calibrating" = "Mengkalibrasi kompas — gerakkan ponsel membentuk angka 8";
+"compass.status.ready" = "Siap";
+
+/* Layar Kamera (AR) */
+"camera.permission_required" = "Izin kamera diperlukan";
+"camera.permission_explanation" = "Anda dapat mengaktifkan akses kamera untuk Kıble Bul melalui aplikasi Pengaturan.";
+"camera.preparing" = "Menyiapkan kamera…";
+
+/* Layar Masjid */
+"mosques.loading" = "Mencari masjid…";
+"mosques.error" = "Masjid tidak dapat dimuat. Periksa koneksi internet Anda dan coba lagi.";
+"mosques.count" = "%d masjid ditemukan";
+"mosques.attribution" = "Data masjid © kontributor OpenStreetMap";
+"mosques.title" = "Masjid Terdekat";
+"mosque.unnamed" = "Masjid Tanpa Nama";
+
+/* Layar Waktu Salat */
+"prayer_times.next" = "Salat berikutnya: %@";
+"prayer_times.today_section" = "Waktu Hari Ini";
+"prayer_times.disclaimer" = "Waktu dihitung di perangkat Anda berdasarkan lokasi Anda (metode Turki / Hanafi). Perbedaan kecil dapat terjadi antar kota.";
+"prayer_times.waiting_location" = "Menunggu Lokasi";
+"prayer_times.waiting_location_detail" = "Izin lokasi diperlukan untuk menghitung waktu salat. Waktu akan muncul secara otomatis setelah izin diberikan.";
+"prayer_times.request_permission" = "Minta Izin Lokasi";
+"prayer_times.title" = "Waktu Salat";
+
+/* Nama Waktu Salat */
+"prayer.fajr" = "Subuh";
+"prayer.sunrise" = "Terbit Matahari";
+"prayer.dhuhr" = "Zuhur";
+"prayer.asr" = "Asar";
+"prayer.maghrib" = "Magrib";
+"prayer.isha" = "Isya";
+
+/* Notifikasi */
+"notification.title" = "Kıble Bul";
+"notification.body" = "Sudah waktunya %@.";
+/* Pengaturan — Kıble Pro */
+"settings.title" = "Pengaturan";
+"settings.pro.section" = "Kıble Bul Pro";
+"settings.pro.active" = "Langganan Anda aktif — bebas iklan";
+"settings.pro.manage" = "Anda dapat mengelola atau membatalkan langganan melalui Pengaturan iPhone > ID Apple > Langganan.";
+"settings.pro.restore" = "Pulihkan Pembelian";
+"settings.pro.description" = "Menghapus semua iklan (banner bawah dan iklan pembuka) dari aplikasi. Semua fitur lainnya berfungsi penuh tanpa langganan.";
+"settings.pro.monthly_title" = "Kıble Pro Bulanan";
+"settings.pro.yearly_title" = "Kıble Pro Tahunan";
+"settings.pro.per_month" = "%@ / bulan";
+"settings.pro.per_year" = "%@ / tahun";
+"settings.pro.price_loading" = "Memuat harga…";
+"settings.pro.price_unavailable" = "Harga tidak dapat dimuat saat ini. Periksa koneksi internet Anda dan coba lagi.";
+"settings.pro.subscribe_monthly" = "Berlangganan Bulanan";
+"settings.pro.subscribe_yearly" = "Berlangganan Tahunan";
+"settings.pro.retry" = "Coba Lagi";
+"settings.pro.savings_badge" = "Paling Hemat";
+"settings.pro.legal_disclaimer" = "Pembayaran akan dibebankan ke akun ID Apple Anda saat pembelian dikonfirmasi. Langganan diperpanjang secara otomatis kecuali dibatalkan setidaknya 24 jam sebelum akhir periode berjalan; biaya perpanjangan dibebankan dalam 24 jam sebelum akhir periode. Anda dapat mengelola langganan atau menonaktifkan perpanjangan otomatis kapan saja melalui Pengaturan iPhone > ID Apple > Langganan.";
+"settings.pro.eula" = "Ketentuan Penggunaan (EULA)";
+"settings.pro.privacy" = "Kebijakan Privasi";
+"settings.pro.purchase_pending" = "Pembelian menunggu persetujuan (mis. batasan Screen Time).";
+"settings.pro.purchase_failed" = "Pembelian tidak dapat diselesaikan: %@";
+"settings.pro.unavailable" = "Langganan tidak tersedia saat ini, silakan coba lagi nanti.";
+"settings.pro.restore_failed" = "Pembelian tidak dapat dipulihkan: %@";
+
+/* Pengaturan — Suara Azan */
+"settings.ezan_sound.section" = "Suara Azan";
+"settings.ezan_sound.enable" = "Putar Azan";
+"settings.ezan_sound.style" = "Qari / Maqam";
+"settings.ezan_sound.explanation" = "Saat waktu salat tiba, azan asli diputar menggantikan suara notifikasi (penuh saat aplikasi terbuka, 30 detik pertama saat tertutup).";
+"settings.ezan_sound.style.classic" = "Klasik";
+"settings.ezan_sound.style.hicaz" = "Maqam Hijaz";
+"settings.ezan_sound.style.saba" = "Maqam Saba";
+"settings.ezan_sound.style.rast" = "Maqam Rast";
+
+/* Pengaturan — Notifikasi */
+"settings.notifications.section" = "Notifikasi Waktu Salat";
+"settings.notifications.toggle" = "Aktifkan Notifikasi";
+"settings.notifications.permission_denied" = "Izin notifikasi ditolak. Anda dapat mengaktifkannya melalui Pengaturan iPhone > Notifikasi > Kıble Bul.";
+"settings.notifications.location_pending" = "Lokasi belum tersedia. Coba lagi setelah lokasi ditemukan.";
+"settings.notifications.scheduled" = "Notifikasi waktu salat telah dijadwalkan untuk 7 hari ke depan.";
+"settings.notifications.privacy_note" = "Notifikasi hanya dihitung di perangkat Anda; lokasi Anda tidak pernah dikirim ke server mana pun.";
+
+/* Pengaturan — Tentang */
+"settings.about.section" = "Tentang";
+"settings.about.version" = "Versi";
+"settings.about.privacy" = "Kebijakan Privasi";
