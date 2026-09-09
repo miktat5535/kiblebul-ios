@@ -48,7 +48,7 @@ struct CompassView: View {
                 .frame(width: 300, height: 300)
 
                 if let location = locationManager.location {
-                    Text("Kâbe'ye uzaklık: \(Int(QiblaCalculator.distanceKm(from: location))) km")
+                    Text(String(format: NSLocalizedString("compass.distance", comment: "Kâbe'ye uzaklık: %d km"), Int(QiblaCalculator.distanceKm(from: location))))
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
                 }
@@ -56,7 +56,7 @@ struct CompassView: View {
                 Spacer()
             }
             .padding(.top, 24)
-            .navigationTitle("Kıble Bul")
+            .navigationTitle(Text("compass.title"))
         }
     }
 
@@ -64,20 +64,20 @@ struct CompassView: View {
     private var statusHeader: some View {
         switch locationManager.authorizationStatus {
         case .notDetermined:
-            Label("Konum izni bekleniyor…", systemImage: "location")
+            Label("compass.status.permission_pending", systemImage: "location")
                 .foregroundStyle(.secondary)
         case .denied, .restricted:
-            Label("Konum izni verilmedi — Ayarlar'dan izin verin", systemImage: "location.slash")
+            Label("compass.status.permission_denied", systemImage: "location.slash")
                 .foregroundStyle(.red)
         default:
             if locationManager.location == nil {
-                Label("Konum aranıyor…", systemImage: "location")
+                Label("compass.status.searching", systemImage: "location")
                     .foregroundStyle(.secondary)
             } else if locationManager.headingAccuracy < 0 {
-                Label("Pusula kalibre ediliyor — telefonu 8 çizerek sallayın", systemImage: "gyroscope")
+                Label("compass.status.calibrating", systemImage: "gyroscope")
                     .foregroundStyle(.orange)
             } else {
-                Label("Hazır", systemImage: "checkmark.circle.fill")
+                Label("compass.status.ready", systemImage: "checkmark.circle.fill")
                     .foregroundStyle(.green)
             }
         }

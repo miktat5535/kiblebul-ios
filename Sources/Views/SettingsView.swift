@@ -1,3 +1,4 @@
+import StoreKit
 import SwiftUI
 
 struct SettingsView: View {
@@ -7,66 +8,63 @@ struct SettingsView: View {
     @State private var notificationsEnabled = false
     @State private var isPurchasing = false
     @State private var notificationMessage: String?
+    @State private var selectedPlan: PlanOption = .yearly
+    @State private var ezanSoundEnabled = EzanSoundSettings.isEnabled
+    @State private var ezanSoundStyle = EzanSoundSettings.style
+
+    private enum PlanOption: Equatable {
+        case monthly
+        case yearly
+    }
 
     var body: some View {
         NavigationStack {
             Form {
                 // App Store İnceleme Kılavuzu 3.1.2 gereği, otomatik yenilenen
-                // aboneliğin satın alma noktasında şunlar GÖRÜNMEK ZORUNDA:
+                // aboneliklerin satın alma noktasında şunlar GÖRÜNMEK ZORUNDA:
                 // adı, süresi, ne sunduğu, fiyatı ve dönemi, otomatik yenileme
                 // açıklaması, Kullanım Koşulları (EULA) ve Gizlilik Politikası
-                // bağlantıları. Bu bölüm hepsini karşılar.
-                Section("Kıble Bul Pro") {
+                // bağlantıları. Aylık VE yıllık plan için de bu bölüm hepsini
+                // karşılar.
+                Section("settings.pro.section") {
                     if storeManager.isProActive {
-                        Label("Aboneliğiniz aktif — reklamsız kullanım", systemImage: "checkmark.seal.fill")
+                        Label("settings.pro.active", systemImage: "checkmark.seal.fill")
                             .foregroundStyle(.green)
 
-                        Text("Aboneliğinizi iPhone Ayarlar > Apple Kimliği > Abonelikler bölümünden yönetebilir veya iptal edebilirsiniz.")
+                        Text("settings.pro.manage")
                             .font(.footnote)
                             .foregroundStyle(.secondary)
 
-                        Button("Satın Almaları Geri Yükle") {
+                        Button("settings.pro.restore") {
                             Task { await storeManager.restorePurchases() }
                         }
                     } else {
-                        VStack(alignment: .leading, spacing: 10) {
-                            Text("Kıble Pro Aylık")
-                                .font(.headline)
-
-                            Text("1 aylık, otomatik yenilenen abonelik. Uygulamadaki tüm reklamları (alt banner ve açılış reklamı) kaldırır. Uygulamanın diğer tüm özellikleri abonelik olmadan da tam olarak çalışır.")
+                        VStack(alignment: .leading, spacing: 14) {
+                            Text("settings.pro.description")
                                 .font(.subheadline)
 
-                            if let product = storeManager.monthlyProduct {
-                                Text("\(product.displayPrice) / ay")
-                                    .font(.title3.weight(.semibold))
-                            } else if storeManager.isLoadingProducts {
-                                Text("Fiyat yükleniyor…")
-                                    .font(.footnote)
-                                    .foregroundStyle(.secondary)
-                            } else {
-                                Text("Fiyat şu anda alınamadı. İnternet bağlantınızı kontrol edip tekrar deneyin.")
-                                    .font(.footnote)
-                                    .foregroundStyle(.secondary)
-                            }
+                            planPicker
 
                             Button {
                                 Task {
                                     isPurchasing = true
-                                    await storeManager.purchase()
+                                    await purchaseSelectedPlan()
                                     isPurchasing = false
                                 }
                             } label: {
                                 if isPurchasing {
                                     ProgressView()
                                 } else {
-                                    Text("Kıble Pro'ya Abone Ol")
+                                    Text(subscribeButtonTitle)
                                 }
                             }
                             .buttonStyle(.borderedProminent)
-                            .disabled(storeManager.monthlyProduct == nil || isPurchasing)
+                            .disabled(selectedProduct == nil || isPurchasing)
 
-                            if storeManager.monthlyProduct == nil && !storeManager.isLoadingProducts {
-                                Button("Tekrar Dene") {
+                            if storeManager.monthlyProduct == nil,
+                               storeManager.yearlyProduct == nil,
+                               !storeManager.isLoadingProducts {
+                                Button("settings.pro.retry") {
                                     Task { await storeManager.loadProducts() }
                                 }
                                 .font(.footnote)
@@ -74,16 +72,14 @@ struct SettingsView: View {
                         }
                         .padding(.vertical, 4)
 
-                        Text("""
-                        Ödeme, satın almayı onayladığınızda Apple Kimliği hesabınızdan tahsil edilir. Abonelik, içinde bulunduğunuz dönem bitmeden en az 24 saat önce iptal edilmezse otomatik olarak yenilenir ve yenileme ücreti dönem bitiminden önceki 24 saat içinde alınır. Aboneliğinizi iPhone Ayarlar > Apple Kimliği > Abonelikler bölümünden istediğiniz zaman yönetebilir veya otomatik yenilemeyi kapatabilirsiniz.
-                        """)
-                        .font(.footnote)
-                        .foregroundStyle(.secondary)
+                        Text("settings.pro.legal_disclaimer")
+                            .font(.footnote)
+                            .foregroundStyle(.secondary)
 
-                        Link("Kullanım Koşulları (EULA)", destination: URL(string: "https://www.apple.com/legal/internet-services/itunes/dev/stdeula/")!)
-                        Link("Gizlilik Politikası", destination: URL(string: "https://miktat5535.github.io/kiblebul-privacy-policy/")!)
+                        Link("settings.pro.eula", destination: URL(string: "https://www.apple.com/legal/internet-services/itunes/dev/stdeula/")!)
+                        Link("settings.pro.privacy", destination: URL(string: "https://miktat5535.github.io/kiblebul-privacy-policy/")!)
 
-                        Button("Satın Almaları Geri Yükle") {
+                        Button("settings.pro.restore") {
                             Task { await storeManager.restorePurchases() }
                         }
                     }
@@ -95,8 +91,32 @@ struct SettingsView: View {
                     }
                 }
 
-                Section("Ezan Vakti Bildirimleri") {
-                    Toggle("Bildirimleri Aç", isOn: $notificationsEnabled)
+                Section("settings.ezan_sound.section") {
+                    Toggle("settings.ezan_sound.enable", isOn: $ezanSoundEnabled)
+                        .onChange(of: ezanSoundEnabled) { _, isOn in
+                            EzanSoundSettings.isEnabled = isOn
+                            rescheduleIfPossible()
+                        }
+
+                    if ezanSoundEnabled {
+                        Picker("settings.ezan_sound.style", selection: $ezanSoundStyle) {
+                            ForEach(AdhanPlayer.ReciterStyle.allCases) { style in
+                                Text(style.localizedName).tag(style)
+                            }
+                        }
+                        .onChange(of: ezanSoundStyle) { _, newStyle in
+                            EzanSoundSettings.style = newStyle
+                            rescheduleIfPossible()
+                        }
+                    }
+
+                    Text("settings.ezan_sound.explanation")
+                        .font(.footnote)
+                        .foregroundStyle(.secondary)
+                }
+
+                Section("settings.notifications.section") {
+                    Toggle("settings.notifications.toggle", isOn: $notificationsEnabled)
                         .onChange(of: notificationsEnabled) { _, isOn in
                             handleNotificationToggle(isOn)
                         }
@@ -105,27 +125,125 @@ struct SettingsView: View {
                             .font(.footnote)
                             .foregroundStyle(.orange)
                     }
-                    Text("Bildirimler yalnızca cihazınızda hesaplanır; konumunuz hiçbir sunucuya gönderilmez.")
+                    Text("settings.notifications.privacy_note")
                         .font(.footnote)
                         .foregroundStyle(.secondary)
                 }
 
-                Section("Hakkında") {
-                    LabeledContent("Sürüm", value: "1.0")
-                    Link("Gizlilik Politikası", destination: URL(string: "https://miktat5535.github.io/kiblebul-privacy-policy/")!)
+                Section("settings.about.section") {
+                    LabeledContent("settings.about.version", value: "1.0")
+                    Link("settings.about.privacy", destination: URL(string: "https://miktat5535.github.io/kiblebul-privacy-policy/")!)
                 }
             }
-            .navigationTitle("Ayarlar")
+            .navigationTitle(Text("settings.title"))
             // Uygulama açılışında ürün bilgisi çekilemediyse (ağ yok, App Store
             // yavaş yanıt verdi vb.) bu ekrana her gelişte tekrar denenir —
             // aksi halde abone olma butonu kalıcı olarak pasif kalabiliyordu.
             .task {
-                if storeManager.monthlyProduct == nil {
+                if storeManager.monthlyProduct == nil, storeManager.yearlyProduct == nil {
                     await storeManager.loadProducts()
                 }
             }
         }
     }
+
+    // MARK: - Plan seçimi (aylık / yıllık)
+
+    private var selectedProduct: Product? {
+        switch selectedPlan {
+        case .monthly: return storeManager.monthlyProduct
+        case .yearly: return storeManager.yearlyProduct
+        }
+    }
+
+    private var subscribeButtonTitle: LocalizedStringKey {
+        selectedPlan == .monthly ? "settings.pro.subscribe_monthly" : "settings.pro.subscribe_yearly"
+    }
+
+    private func purchaseSelectedPlan() async {
+        guard let product = selectedProduct else { return }
+        await storeManager.purchase(product)
+    }
+
+    @ViewBuilder
+    private var planPicker: some View {
+        VStack(spacing: 10) {
+            if let monthly = storeManager.monthlyProduct {
+                planRow(
+                    title: "settings.pro.monthly_title",
+                    priceText: String(format: NSLocalizedString("settings.pro.per_month", comment: "%@ / ay"), monthly.displayPrice),
+                    isSelected: selectedPlan == .monthly,
+                    badge: nil
+                ) {
+                    selectedPlan = .monthly
+                }
+            }
+            if let yearly = storeManager.yearlyProduct {
+                planRow(
+                    title: "settings.pro.yearly_title",
+                    priceText: String(format: NSLocalizedString("settings.pro.per_year", comment: "%@ / yıl"), yearly.displayPrice),
+                    isSelected: selectedPlan == .yearly,
+                    badge: "settings.pro.savings_badge"
+                ) {
+                    selectedPlan = .yearly
+                }
+            }
+            if storeManager.monthlyProduct == nil, storeManager.yearlyProduct == nil {
+                if storeManager.isLoadingProducts {
+                    Text("settings.pro.price_loading")
+                        .font(.footnote)
+                        .foregroundStyle(.secondary)
+                } else {
+                    Text("settings.pro.price_unavailable")
+                        .font(.footnote)
+                        .foregroundStyle(.secondary)
+                }
+            }
+        }
+        .onAppear {
+            // Yıllık ürün mevcutsa varsayılan seçili plan olsun (daha
+            // avantajlı fiyat); yoksa aylığa düşer.
+            if storeManager.yearlyProduct == nil { selectedPlan = .monthly }
+        }
+    }
+
+    private func planRow(
+        title: LocalizedStringKey,
+        priceText: String,
+        isSelected: Bool,
+        badge: LocalizedStringKey?,
+        onSelect: @escaping () -> Void
+    ) -> some View {
+        Button(action: onSelect) {
+            HStack {
+                VStack(alignment: .leading, spacing: 2) {
+                    HStack(spacing: 6) {
+                        Text(title)
+                            .font(.subheadline.weight(.semibold))
+                        if let badge {
+                            Text(badge)
+                                .font(.caption2.weight(.bold))
+                                .padding(.horizontal, 6)
+                                .padding(.vertical, 2)
+                                .background(Color.accentColor.opacity(0.15), in: Capsule())
+                                .foregroundStyle(Color.accentColor)
+                        }
+                    }
+                    Text(priceText)
+                        .font(.footnote)
+                        .foregroundStyle(.secondary)
+                }
+                Spacer()
+                Image(systemName: isSelected ? "checkmark.circle.fill" : "circle")
+                    .foregroundStyle(isSelected ? Color.accentColor : Color.secondary)
+            }
+            .padding(10)
+            .background(isSelected ? Color.accentColor.opacity(0.08) : Color.clear, in: RoundedRectangle(cornerRadius: 10))
+        }
+        .buttonStyle(.plain)
+    }
+
+    // MARK: - Bildirimler
 
     private func handleNotificationToggle(_ isOn: Bool) {
         guard isOn else {
@@ -140,19 +258,35 @@ struct SettingsView: View {
 
             guard granted else {
                 notificationsEnabled = false
-                notificationMessage = "Bildirim izni verilmedi. iPhone Ayarlar > Bildirimler > Kıble Bul bölümünden açabilirsiniz."
+                notificationMessage = NSLocalizedString(
+                    "settings.notifications.permission_denied",
+                    comment: "Bildirim izni verilmedi hata mesajı"
+                )
                 return
             }
 
             guard let location = locationManager.location else {
                 notificationsEnabled = false
-                notificationMessage = "Konum henüz alınamadı. Konum bulunduktan sonra tekrar deneyin."
+                notificationMessage = NSLocalizedString(
+                    "settings.notifications.location_pending",
+                    comment: "Konum henüz alınamadı hata mesajı"
+                )
                 return
             }
 
             NotificationManager.reschedule(for: location)
-            notificationMessage = "Önümüzdeki 7 gün için vakit bildirimleri kuruldu."
+            notificationMessage = NSLocalizedString(
+                "settings.notifications.scheduled",
+                comment: "Bildirimler kuruldu bilgi mesajı"
+            )
         }
+    }
+
+    /// Ezan sesi tercihi değiştiğinde (aç/kapat veya makam), bildirimler zaten
+    /// açıksa yeni tercihin bildirime yansıması için yeniden planlar.
+    private func rescheduleIfPossible() {
+        guard notificationsEnabled, let location = locationManager.location else { return }
+        NotificationManager.reschedule(for: location)
     }
 }
 

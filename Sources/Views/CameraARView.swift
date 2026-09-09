@@ -43,16 +43,16 @@ struct CameraARView: View {
                     Image(systemName: "camera.fill")
                         .font(.system(size: 48))
                         .foregroundStyle(.secondary)
-                    Text("Kamera izni gerekli")
+                    Text("camera.permission_required")
                         .font(.headline)
-                    Text("Ayarlar uygulamasından Kıble Bul için kamera iznini açabilirsiniz.")
+                    Text("camera.permission_explanation")
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
                         .multilineTextAlignment(.center)
                         .padding(.horizontal, 32)
                 }
             } else {
-                ProgressView("Kamera hazırlanıyor…")
+                ProgressView(NSLocalizedString("camera.preparing", comment: "Kamera hazırlanıyor…"))
             }
         }
         .task {

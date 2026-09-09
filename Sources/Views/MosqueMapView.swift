@@ -30,7 +30,7 @@ struct MosqueMapView: View {
                 }
 
                 if isLoading {
-                    ProgressView("Camiler aranıyor…")
+                    ProgressView(NSLocalizedString("mosques.loading", comment: "Camiler aranıyor…"))
                         .padding()
                         .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 12))
                         .padding(.bottom, 24)
@@ -41,7 +41,7 @@ struct MosqueMapView: View {
                         .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 12))
                         .padding(.bottom, 24)
                 } else if !mosques.isEmpty {
-                    Text("\(mosques.count) cami bulundu")
+                    Text(String(format: NSLocalizedString("mosques.count", comment: "%d cami bulundu"), mosques.count))
                         .font(.footnote)
                         .padding(.horizontal, 12)
                         .padding(.vertical, 6)
@@ -56,7 +56,7 @@ struct MosqueMapView: View {
             // sekme çubuğunun üzerine bindirip dokunuşları yutabiliyor.
             // `overlay` yalnızca bu görünümün kendi sınırları içinde çizer.
             .overlay(alignment: .bottomLeading) {
-                Text("Cami verisi © OpenStreetMap katkıda bulunanlar")
+                Text("mosques.attribution")
                     .font(.caption2)
                     .foregroundStyle(.secondary)
                     .padding(.horizontal, 8)
@@ -66,7 +66,7 @@ struct MosqueMapView: View {
                     .padding(.bottom, 4)
                     .allowsHitTesting(false)
             }
-            .navigationTitle("Yakındaki Camiler")
+            .navigationTitle(Text("mosques.title"))
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
@@ -113,7 +113,7 @@ struct MosqueMapView: View {
         do {
             mosques = try await OverpassMosqueService.fetchNearbyMosques(center: coordinate)
         } catch {
-            errorMessage = "Camiler yüklenemedi. İnternet bağlantınızı kontrol edip tekrar deneyin."
+            errorMessage = NSLocalizedString("mosques.error", comment: "Camiler yüklenemedi. İnternet bağlantınızı kontrol edip tekrar deneyin.")
         }
     }
 }

@@ -9,6 +9,10 @@ struct PrayerTimesView: View {
 
     @State private var now = Date()
 
+    /// Uygulama ön plandayken tam uzunlukta ezan sesi çalındığında aynı
+    /// vaktin tekrar tekrar tetiklenmemesi için işaretlenen kimlikler.
+    @State private var firedAdhanIdentifiers: Set<String> = []
+
     private let ticker = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 
     /// Listede satır olarak kullanılan basit model.
@@ -17,15 +21,15 @@ struct PrayerTimesView: View {
     /// elemanlarına KeyPath tanımlanamaz. Bu yüzden `namedTimes` çıktısı
     /// burada Identifiable bir yapıya dönüştürülür.
     private struct Row: Identifiable {
-        let name: String
+        let prayer: Prayer
         let date: Date
-        var id: String { name }
+        var id: String { prayer.rawValue }
     }
 
     private func rows(for date: Date) -> [Row]? {
         guard let location = locationManager.location,
               let times = PrayerTimeCalculator.calculate(for: date, at: location) else { return nil }
-        return times.namedTimes.map { Row(name: $0.name, date: $0.date) }
+        return times.namedTimes.map { Row(prayer: $0.prayer, date: $0.date) }
     }
 
     private var todayRows: [Row]? { rows(for: now) }
@@ -49,7 +53,7 @@ struct PrayerTimesView: View {
                         if let nextPrayer {
                             Section {
                                 VStack(alignment: .leading, spacing: 6) {
-                                    Text("Sıradaki vakit: \(nextPrayer.name)")
+                                    Text(String(format: NSLocalizedString("prayer_times.next", comment: "Sıradaki vakit: %@"), nextPrayer.prayer.localizedName))
                                         .font(.headline)
                                     Text(countdownText(to: nextPrayer.date))
                                         .font(.system(size: 34, weight: .semibold, design: .rounded))
@@ -60,10 +64,10 @@ struct PrayerTimesView: View {
                             }
                         }
 
-                        Section("Bugünün Vakitleri") {
+                        Section(NSLocalizedString("prayer_times.today_section", comment: "Bugünün Vakitleri")) {
                             ForEach(todayRows) { item in
                                 HStack {
-                                    Text(item.name)
+                                    Text(item.prayer.localizedName)
                                     Spacer()
                                     Text(Self.timeFormatter.string(from: item.date))
                                         .monospacedDigit()
@@ -73,7 +77,7 @@ struct PrayerTimesView: View {
                         }
 
                         Section {
-                            Text("Vakitler bulunduğunuz konuma göre cihazınızda hesaplanır (Türkiye / Hanefî). Farklı şehirlerde küçük farklar olabilir.")
+                            Text("prayer_times.disclaimer")
                                 .font(.footnote)
                                 .foregroundStyle(.secondary)
                         }
@@ -83,24 +87,42 @@ struct PrayerTimesView: View {
                         Image(systemName: "location.slash")
                             .font(.system(size: 44))
                             .foregroundStyle(.secondary)
-                        Text("Konum bekleniyor")
+                        Text("prayer_times.waiting_location")
                             .font(.headline)
-                        Text("Namaz vakitlerini hesaplayabilmek için konum iznine ihtiyaç var. İzin verdikten sonra vakitler otomatik gelir.")
+                        Text("prayer_times.waiting_location_detail")
                             .font(.subheadline)
                             .foregroundStyle(.secondary)
                             .multilineTextAlignment(.center)
                             .padding(.horizontal, 32)
-                        Button("Konum İznini İste") {
+                        Button("prayer_times.request_permission") {
                             locationManager.requestPermission()
                         }
                         .buttonStyle(.borderedProminent)
                     }
                 }
             }
-            .navigationTitle("Namaz Vakitleri")
+            .navigationTitle(Text("prayer_times.title"))
         }
         .onReceive(ticker) { value in
             now = value
+            triggerAdhanIfNeeded()
+        }
+    }
+
+    /// Uygulama ön plandayken tam vakti geçen bir namaz olup olmadığını
+    /// kontrol eder; varsa ve kullanıcı ezan sesini açtıysa tam uzunlukta
+    /// gerçek ezan sesini çalar. Bildirimler (arka plan/kapalıyken) ayrıca
+    /// `NotificationManager` üzerinden, iOS'un 30 saniyelik sınırına tabi
+    /// kısaltılmış sesle çalışır — bu ikisi birbirini tamamlar.
+    private func triggerAdhanIfNeeded() {
+        guard EzanSoundSettings.isEnabled, let rows = todayRows else { return }
+        for row in rows where row.prayer != .sunrise {
+            let elapsed = now.timeIntervalSince(row.date)
+            guard elapsed >= 0, elapsed < 2 else { continue }
+            let identifier = "\(row.prayer.rawValue)-\(Int(row.date.timeIntervalSince1970))"
+            guard !firedAdhanIdentifiers.contains(identifier) else { continue }
+            firedAdhanIdentifiers.insert(identifier)
+            AdhanPlayer.shared.playFullAdhan(style: EzanSoundSettings.style)
         }
     }
 
@@ -112,9 +134,13 @@ struct PrayerTimesView: View {
         return String(format: "%02d:%02d:%02d", hours, minutes, seconds)
     }
 
+    /// Saat formatı, uygulamanın gösterildiği dile göre değişir (ör. bazı
+    /// dillerde farklı rakam/ayraç kuralları) ama her zaman 24 saatlik
+    /// "HH:mm" biçimini kullanır — namaz vakti uygulamalarında yaygın olan
+    /// ve karışıklığı önleyen kural.
     private static let timeFormatter: DateFormatter = {
         let formatter = DateFormatter()
-        formatter.locale = Locale(identifier: "tr_TR")
+        formatter.locale = Locale.current
         formatter.dateFormat = "HH:mm"
         return formatter
     }()
