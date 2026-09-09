@@ -1,21 +1,32 @@
 import Foundation
 import StoreKit
 
-/// "Kıble Bul Pro" aylık aboneliğini (StoreKit 2) yönetir.
+/// "Kıble Bul Pro" aboneliğini (StoreKit 2) yönetir.
 ///
-/// Fiyat (9,90 TL/ay) kodda TANIMLANMAZ — App Store Connect'te oluşturacağınız
-/// abonelik ürününün fiyatı orada belirlenir, StoreKit bunu otomatik çeker.
+/// İki ürün sunulur — aylık ve yıllık (yıllık, aylığa göre indirimli). Her
+/// ikisi de App Store Connect'te aynı abonelik grubunda ("Kıble Pro")
+/// tanımlıdır; kullanıcı ikisinden birine abone olabilir, ikisi de aynı
+/// "reklamları kaldır" yetkisini (entitlement) verir.
+///
+/// Fiyatlar kodda TANIMLANMAZ — App Store Connect'te oluşturacağınız
+/// abonelik ürünlerinin fiyatı orada belirlenir, StoreKit bunu otomatik çeker.
 /// Bkz. README-TR.md → "App Store Connect'te abonelik oluşturma" bölümü.
 ///
-/// Ürün kimliği (Product ID) App Store Connect'te birebir bu şekilde
-/// oluşturulmalıdır: "com.miktat55.kiblebul.pro.monthly"
+/// Ürün kimlikleri (Product ID) App Store Connect'te birebir bu şekilde
+/// oluşturulmalıdır:
+///   - "com.miktat55.kiblebul.pro.monthly"
+///   - "com.miktat55.kiblebul.pro.yearly"
 @MainActor
 final class StoreManager: ObservableObject {
 
     static let proMonthlyProductID = "com.miktat55.kiblebul.pro.monthly"
+    static let proYearlyProductID = "com.miktat55.kiblebul.pro.yearly"
+
+    private static var allProductIDs: [String] { [proMonthlyProductID, proYearlyProductID] }
 
     @Published private(set) var isProActive = false
     @Published private(set) var monthlyProduct: Product?
+    @Published private(set) var yearlyProduct: Product?
     @Published private(set) var isLoadingProducts = false
     @Published var lastErrorMessage: String?
 
@@ -25,6 +36,7 @@ final class StoreManager: ObservableObject {
         transactionListenerTask = listenForTransactionUpdates()
         Task {
             await loadProducts()
+            await refreshEntitlements()
         }
     }
 
@@ -38,21 +50,21 @@ final class StoreManager: ObservableObject {
         isLoadingProducts = true
         defer { isLoadingProducts = false }
         do {
-            let products = try await Product.products(for: [Self.proMonthlyProductID])
-            monthlyProduct = products.first
+            let products = try await Product.products(for: Self.allProductIDs)
+            monthlyProduct = products.first(where: { $0.id == Self.proMonthlyProductID })
+            yearlyProduct = products.first(where: { $0.id == Self.proYearlyProductID })
         } catch {
-            lastErrorMessage = "Abonelik bilgisi yüklenemedi. İnternet bağlantınızı kontrol edin."
+            lastErrorMessage = NSLocalizedString(
+                "settings.pro.price_unavailable",
+                comment: "Abonelik bilgisi yüklenemedi hata mesajı"
+            )
         }
     }
 
     // MARK: - Satın alma
 
-    func purchase() async {
-        guard let product = monthlyProduct else {
-            lastErrorMessage = "Abonelik şu anda kullanılamıyor, lütfen daha sonra tekrar deneyin."
-            return
-        }
-
+    /// Belirtilen ürünü (aylık veya yıllık) satın alır.
+    func purchase(_ product: Product) async {
         do {
             let result = try await product.purchase()
             switch result {
@@ -64,13 +76,32 @@ final class StoreManager: ObservableObject {
             case .userCancelled:
                 break
             case .pending:
-                lastErrorMessage = "Satın alma onay bekliyor (ör. Ekran Zamanı izni)."
+                lastErrorMessage = NSLocalizedString(
+                    "settings.pro.purchase_pending",
+                    comment: "Satın alma onay bekliyor hata mesajı"
+                )
             @unknown default:
                 break
             }
         } catch {
-            lastErrorMessage = "Satın alma tamamlanamadı: \(error.localizedDescription)"
+            let format = NSLocalizedString(
+                "settings.pro.purchase_failed",
+                comment: "Satın alma tamamlanamadı hata mesajı, %@ = hata açıklaması"
+            )
+            lastErrorMessage = String(format: format, error.localizedDescription)
         }
+    }
+
+    /// Geriye dönük uyumluluk için: parametresiz çağrı aylık ürünü satın alır.
+    func purchase() async {
+        guard let product = monthlyProduct else {
+            lastErrorMessage = NSLocalizedString(
+                "settings.pro.unavailable",
+                comment: "Abonelik şu anda kullanılamıyor hata mesajı"
+            )
+            return
+        }
+        await purchase(product)
     }
 
     /// Kullanıcı yeni bir cihaza geçtiğinde veya uygulamayı sildiyse
@@ -80,7 +111,11 @@ final class StoreManager: ObservableObject {
             try await AppStore.sync()
             await refreshEntitlements()
         } catch {
-            lastErrorMessage = "Satın almalar geri yüklenemedi: \(error.localizedDescription)"
+            let format = NSLocalizedString(
+                "settings.pro.restore_failed",
+                comment: "Satın almalar geri yüklenemedi hata mesajı, %@ = hata açıklaması"
+            )
+            lastErrorMessage = String(format: format, error.localizedDescription)
         }
     }
 
@@ -90,7 +125,7 @@ final class StoreManager: ObservableObject {
         var active = false
         for await result in Transaction.currentEntitlements {
             if case .verified(let transaction) = result,
-               transaction.productID == Self.proMonthlyProductID,
+               Self.allProductIDs.contains(transaction.productID),
                transaction.revocationDate == nil {
                 active = true
             }

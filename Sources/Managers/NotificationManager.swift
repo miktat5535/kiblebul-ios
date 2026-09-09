@@ -9,6 +9,13 @@ import UserNotifications
 /// önceden planlanır (iOS'ta arka planda sürekli çalışan bir servis yerine
 /// bu şekilde "önceden planlama" yaklaşımı kullanılır — pil dostu ve resmi
 /// olarak desteklenen yöntemdir).
+///
+/// Kullanıcı Ayarlar'dan "Ezan Sesini Çal"ı açtıysa ve ilgili ses dosyası
+/// uygulama paketine eklenmişse, bildirimler sistemin varsayılan sesi yerine
+/// gerçek (kısaltılmış, ≤30 sn) ezan sesiyle gelir — bkz. `AdhanPlayer`.
+/// Uygulama ön plandayken tam uzunluktaki ezan sesi `PrayerTimesView`
+/// üzerinden ayrıca tetiklenir (bildirim sesleri iOS'ta 30 saniyeyle
+/// sınırlıdır).
 enum NotificationManager {
 
     static func requestPermission() async -> Bool {
@@ -27,7 +34,7 @@ enum NotificationManager {
 
     /// Var olan tüm ezan vakti bildirimlerini temizleyip önümüzdeki `days`
     /// gün için yeniden planlar. Konum değiştiğinde veya ayarlar
-    /// güncellendiğinde tekrar çağrılmalıdır.
+    /// güncellendiğinde (ör. ezan sesi aç/kapat) tekrar çağrılmalıdır.
     static func reschedule(for coordinate: CLLocationCoordinate2D, days: Int = 7) {
         let center = UNUserNotificationCenter.current()
         center.removeAllPendingNotificationRequests()
@@ -39,23 +46,40 @@ enum NotificationManager {
             guard let day = calendar.date(byAdding: .day, value: dayOffset, to: now),
                   let times = PrayerTimeCalculator.calculate(for: day, at: coordinate) else { continue }
 
-            for (name, date) in times.namedTimes where date > now {
-                scheduleNotification(prayerName: name, at: date, center: center)
+            for (prayer, date) in times.namedTimes where date > now {
+                scheduleNotification(prayer: prayer, at: date, center: center)
             }
         }
     }
 
-    private static func scheduleNotification(prayerName: String, at date: Date, center: UNUserNotificationCenter) {
+    private static func scheduleNotification(prayer: Prayer, at date: Date, center: UNUserNotificationCenter) {
         let content = UNMutableNotificationContent()
-        content.title = "Kıble Bul"
-        content.body = "\(prayerName) vakti girdi."
-        content.sound = .default
+        content.title = NSLocalizedString("notification.title", comment: "Bildirim başlığı — uygulama adı")
+
+        let bodyFormat = NSLocalizedString(
+            "notification.body",
+            comment: "Bildirim gövdesi, %@ = vakit adı (İmsak, Öğle, vb.)"
+        )
+        content.body = String(format: bodyFormat, prayer.localizedName)
+
+        // Güneş doğuşunda ezan okunmaz — sadece bilgilendirme bildirimi;
+        // gerçek ezan sesi yalnızca 5 vakit namaz için kullanılır.
+        if prayer != .sunrise,
+           EzanSoundSettings.isEnabled,
+           let fileName = AdhanPlayer.notificationSoundFileName(for: EzanSoundSettings.style) {
+            content.sound = UNNotificationSound(named: UNNotificationSoundName(fileName))
+        } else {
+            content.sound = .default
+        }
 
         let components = Calendar(identifier: .gregorian).dateComponents(
             [.year, .month, .day, .hour, .minute, .second], from: date
         )
         let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: false)
-        let identifier = "ezan-\(prayerName)-\(Int(date.timeIntervalSince1970))"
+        // Kimlik dile bağlı olmayan `prayer.rawValue` (ör. "fajr") kullanır —
+        // önceki sürümlerde yerelleştirilmiş isim (ör. "İmsak") kullanılıyordu,
+        // bu artık dil değiştiğinde kimliklerin tutarsız kalmasını önler.
+        let identifier = "ezan-\(prayer.rawValue)-\(Int(date.timeIntervalSince1970))"
         let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
 
         center.add(request)
