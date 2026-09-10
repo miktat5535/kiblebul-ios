@@ -22,22 +22,32 @@ targets:
     platform: iOS
     sources:
       - path: Sources
-      - path: Resources/Assets.xcassets
-      - path: Resources/tr.lproj
-      - path: Resources/en.lproj
-      - path: Resources/ar.lproj
-      - path: Resources/de.lproj
-      - path: Resources/fr.lproj
-      - path: Resources/nl.lproj
-      - path: Resources/ur.lproj
-      - path: Resources/id.lproj
-      - path: Resources/ru.lproj
+      - path: Resources
+        # ÖNEMLİ — LOKALİZASYON DÜZELTMESİ (9 Eylül 2026):
+        # xx.lproj klasörleri (tr.lproj, en.lproj, ar.lproj, ...) burada TEK TEK
+        # ayrı kaynak olarak DEĞİL, ortak üst klasör "Resources" tek bir kaynak
+        # olarak verilir. XcodeGen, aynı isimli dosyaları (ör. Localizable.strings)
+        # birbirine "localized variant group" olarak SADECE ortak bir üst klasör
+        # taranırken karşılaşılan .lproj alt klasörleri için bağlar. Her .lproj'u
+        # ayrı ayrı üst seviye kaynak olarak listelemek (önceki hatalı hâl) bu
+        # eşleştirmeyi bozuyordu: her dilin Localizable.strings dosyası birbirinden
+        # bağımsız, düz bir kaynakmış gibi eklendi ve hiçbiri uygulama paketinde
+        # doğru "<dil>.lproj/Localizable.strings" yoluna kopyalanmadı. Sonuç:
+        # NSLocalizedString / Text(_:) çağrıları hiçbir çeviri bulamadı ve ekranda
+        # çeviri yerine anahtar metinler (ör. "compass.title", "tab.compass")
+        # olduğu gibi göründü — derleme başarılı olduğu için bu hata TestFlight'a
+        # kadar fark edilmedi. Bu satırı tekrar ayrı ayrı .lproj listesine
+        # DÖNÜŞTÜRMEYİN.
+        excludes:
+          - "Sounds/**"
       - path: Resources/Sounds
         # "group" (varsayılan) olarak eklenir, "folder reference" DEĞİL:
         # bu sayede içine konan ses dosyaları (ör. adhan_classic_notification.caf)
         # uygulama paketinin KÖKÜNE düz olarak kopyalanır. UNNotificationSound(named:)
         # bir alt klasör yolunu kabul etmez — sadece bu şekilde çalışır. Bu ayarı
         # değiştirmeyin (bkz. AdhanPlayer.swift + README-TR.md "Ezan Sesi Ekleme").
+        # "Resources" kaynağından "excludes" ile hariç tutulup burada ayrı
+        # tanımlanmasının nedeni budur — genel .lproj/asset taramasına karışmasın.
         type: group
         optional: true
     info:
