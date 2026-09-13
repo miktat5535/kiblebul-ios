@@ -1,21 +1,14 @@
-import StoreKit
 import SwiftUI
 
 struct SettingsView: View {
     @EnvironmentObject private var storeManager: StoreManager
     @EnvironmentObject private var locationManager: LocationManager
+    @EnvironmentObject private var usageLimiter: DailyUsageLimiter
 
     @State private var notificationsEnabled = false
-    @State private var isPurchasing = false
     @State private var notificationMessage: String?
-    @State private var selectedPlan: PlanOption = .yearly
     @State private var ezanSoundEnabled = EzanSoundSettings.isEnabled
     @State private var ezanSoundStyle = EzanSoundSettings.style
-
-    private enum PlanOption: Equatable {
-        case monthly
-        case yearly
-    }
 
     var body: some View {
         NavigationStack {
@@ -38,56 +31,30 @@ struct SettingsView: View {
                         Button("settings.pro.restore") {
                             Task { await storeManager.restorePurchases() }
                         }
-                    } else {
-                        VStack(alignment: .leading, spacing: 14) {
-                            Text("settings.pro.description")
-                                .font(.subheadline)
 
-                            planPicker
-
-                            Button {
-                                Task {
-                                    isPurchasing = true
-                                    await purchaseSelectedPlan()
-                                    isPurchasing = false
-                                }
-                            } label: {
-                                if isPurchasing {
-                                    ProgressView()
-                                } else {
-                                    Text(subscribeButtonTitle)
-                                }
-                            }
-                            .buttonStyle(.borderedProminent)
-                            .disabled(selectedProduct == nil || isPurchasing)
-
-                            if storeManager.monthlyProduct == nil,
-                               storeManager.yearlyProduct == nil,
-                               !storeManager.isLoadingProducts {
-                                Button("settings.pro.retry") {
-                                    Task { await storeManager.loadProducts() }
-                                }
+                        if let errorMessage = storeManager.lastErrorMessage {
+                            Text(errorMessage)
                                 .font(.footnote)
-                            }
+                                .foregroundStyle(.red)
                         }
-                        .padding(.vertical, 4)
+                    } else {
+                        // Abone olmadan önce, ücretsiz kullanıcıya bugün
+                        // kaç hakkı kaldığını göster — aboneliğin neden
+                        // gerekli olduğu burada da açık olsun.
+                        Text(
+                            String(
+                                format: NSLocalizedString(
+                                    "usage.banner.remaining",
+                                    comment: "Bugün kalan ücretsiz kullanım hakkı, %d = kalan, %d = toplam"
+                                ),
+                                usageLimiter.remainingUses,
+                                DailyUsageLimiter.dailyFreeLimit
+                            )
+                        )
+                        .font(.footnote)
+                        .foregroundStyle(.secondary)
 
-                        Text("settings.pro.legal_disclaimer")
-                            .font(.footnote)
-                            .foregroundStyle(.secondary)
-
-                        Link("settings.pro.eula", destination: URL(string: "https://www.apple.com/legal/internet-services/itunes/dev/stdeula/")!)
-                        Link("settings.pro.privacy", destination: URL(string: "https://miktat5535.github.io/kiblebul-privacy-policy/")!)
-
-                        Button("settings.pro.restore") {
-                            Task { await storeManager.restorePurchases() }
-                        }
-                    }
-
-                    if let errorMessage = storeManager.lastErrorMessage {
-                        Text(errorMessage)
-                            .font(.footnote)
-                            .foregroundStyle(.red)
+                        ProSubscriptionOfferView()
                     }
                 }
 
@@ -131,116 +98,12 @@ struct SettingsView: View {
                 }
 
                 Section("settings.about.section") {
-                    LabeledContent("settings.about.version", value: "1.0")
+                    LabeledContent("settings.about.version", value: "1.1")
                     Link("settings.about.privacy", destination: URL(string: "https://miktat5535.github.io/kiblebul-privacy-policy/")!)
                 }
             }
             .navigationTitle(Text("settings.title"))
-            // Uygulama açılışında ürün bilgisi çekilemediyse (ağ yok, App Store
-            // yavaş yanıt verdi vb.) bu ekrana her gelişte tekrar denenir —
-            // aksi halde abone olma butonu kalıcı olarak pasif kalabiliyordu.
-            .task {
-                if storeManager.monthlyProduct == nil, storeManager.yearlyProduct == nil {
-                    await storeManager.loadProducts()
-                }
-            }
         }
-    }
-
-    // MARK: - Plan seçimi (aylık / yıllık)
-
-    private var selectedProduct: Product? {
-        switch selectedPlan {
-        case .monthly: return storeManager.monthlyProduct
-        case .yearly: return storeManager.yearlyProduct
-        }
-    }
-
-    private var subscribeButtonTitle: LocalizedStringKey {
-        selectedPlan == .monthly ? "settings.pro.subscribe_monthly" : "settings.pro.subscribe_yearly"
-    }
-
-    private func purchaseSelectedPlan() async {
-        guard let product = selectedProduct else { return }
-        await storeManager.purchase(product)
-    }
-
-    @ViewBuilder
-    private var planPicker: some View {
-        VStack(spacing: 10) {
-            if let monthly = storeManager.monthlyProduct {
-                planRow(
-                    title: "settings.pro.monthly_title",
-                    priceText: String(format: NSLocalizedString("settings.pro.per_month", comment: "%@ / ay"), monthly.displayPrice),
-                    isSelected: selectedPlan == .monthly,
-                    badge: nil
-                ) {
-                    selectedPlan = .monthly
-                }
-            }
-            if let yearly = storeManager.yearlyProduct {
-                planRow(
-                    title: "settings.pro.yearly_title",
-                    priceText: String(format: NSLocalizedString("settings.pro.per_year", comment: "%@ / yıl"), yearly.displayPrice),
-                    isSelected: selectedPlan == .yearly,
-                    badge: "settings.pro.savings_badge"
-                ) {
-                    selectedPlan = .yearly
-                }
-            }
-            if storeManager.monthlyProduct == nil, storeManager.yearlyProduct == nil {
-                if storeManager.isLoadingProducts {
-                    Text("settings.pro.price_loading")
-                        .font(.footnote)
-                        .foregroundStyle(.secondary)
-                } else {
-                    Text("settings.pro.price_unavailable")
-                        .font(.footnote)
-                        .foregroundStyle(.secondary)
-                }
-            }
-        }
-        .onAppear {
-            // Yıllık ürün mevcutsa varsayılan seçili plan olsun (daha
-            // avantajlı fiyat); yoksa aylığa düşer.
-            if storeManager.yearlyProduct == nil { selectedPlan = .monthly }
-        }
-    }
-
-    private func planRow(
-        title: LocalizedStringKey,
-        priceText: String,
-        isSelected: Bool,
-        badge: LocalizedStringKey?,
-        onSelect: @escaping () -> Void
-    ) -> some View {
-        Button(action: onSelect) {
-            HStack {
-                VStack(alignment: .leading, spacing: 2) {
-                    HStack(spacing: 6) {
-                        Text(title)
-                            .font(.subheadline.weight(.semibold))
-                        if let badge {
-                            Text(badge)
-                                .font(.caption2.weight(.bold))
-                                .padding(.horizontal, 6)
-                                .padding(.vertical, 2)
-                                .background(Color.accentColor.opacity(0.15), in: Capsule())
-                                .foregroundStyle(Color.accentColor)
-                        }
-                    }
-                    Text(priceText)
-                        .font(.footnote)
-                        .foregroundStyle(.secondary)
-                }
-                Spacer()
-                Image(systemName: isSelected ? "checkmark.circle.fill" : "circle")
-                    .foregroundStyle(isSelected ? Color.accentColor : Color.secondary)
-            }
-            .padding(10)
-            .background(isSelected ? Color.accentColor.opacity(0.08) : Color.clear, in: RoundedRectangle(cornerRadius: 10))
-        }
-        .buttonStyle(.plain)
     }
 
     // MARK: - Bildirimler
@@ -294,4 +157,5 @@ struct SettingsView: View {
     SettingsView()
         .environmentObject(StoreManager())
         .environmentObject(LocationManager())
+        .environmentObject(DailyUsageLimiter())
 }
