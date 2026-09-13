@@ -47,13 +47,14 @@
 /* Meldingen */
 "notification.title" = "Kıble Bul";
 "notification.body" = "Het is tijd voor %@.";
+
 /* Instellingen — Kıble Pro */
 "settings.title" = "Instellingen";
 "settings.pro.section" = "Kıble Bul Pro";
 "settings.pro.active" = "Uw abonnement is actief — advertentievrij gebruik";
 "settings.pro.manage" = "U kunt uw abonnement beheren of opzeggen via iPhone-instellingen > Apple-ID > Abonnementen.";
 "settings.pro.restore" = "Aankopen herstellen";
-"settings.pro.description" = "Verwijdert alle advertenties (onderste banner en opstartadvertentie) uit de app. Alle andere functies werken volledig, ook zonder abonnement.";
+"settings.pro.description" = "In de gratis versie kunt u gebedstijden, het kibla-kompas, de camera-(AR)-weergave en de moskeekaart samen maximaal 3 keer per dag gebruiken. Met een abonnement op Kıble Pro vervalt deze limiet en krijgt u onbeperkte, advertentievrije toegang.";
 "settings.pro.monthly_title" = "Kıble Pro Maandelijks";
 "settings.pro.yearly_title" = "Kıble Pro Jaarlijks";
 "settings.pro.per_month" = "%@ / maand";
@@ -71,6 +72,12 @@
 "settings.pro.purchase_failed" = "Aankoop kon niet worden voltooid: %@";
 "settings.pro.unavailable" = "Abonnement is nu niet beschikbaar, probeer het later opnieuw.";
 "settings.pro.restore_failed" = "Aankopen konden niet worden hersteld: %@";
+
+/* Gratis dagelijkse limiet / Abonnementsaanbod */
+"usage.banner.remaining" = "Gratis gebruiken vandaag nog over: %d/%d";
+"usage.paywall.title" = "U heeft de gratis limiet van vandaag bereikt";
+"usage.paywall.message" = "U heeft de gratis functies van Kıble Bul vandaag al %d keer gebruikt. Abonneer u op Kıble Pro voor onbeperkte, advertentievrije toegang.";
+"usage.paywall.reset_note" = "Uw gratis dagelijkse gebruiken worden elke nacht om middernacht gereset.";
 
 /* Instellingen — Ezan-geluid */
 "settings.ezan_sound.section" = "Ezan-geluid";
