@@ -47,13 +47,14 @@
 /* اطلاعات */
 "notification.title" = "Kıble Bul";
 "notification.body" = "%@ کا وقت ہو گیا ہے۔";
+
 /* ترتیبات — Kıble Pro */
 "settings.title" = "ترتیبات";
 "settings.pro.section" = "Kıble Bul Pro";
 "settings.pro.active" = "آپ کی رکنیت فعال ہے — بغیر اشتہار استعمال";
 "settings.pro.manage" = "آپ اپنی رکنیت کو iPhone ترتیبات > Apple ID > رکنیتیں سے منظم یا منسوخ کر سکتے ہیں۔";
 "settings.pro.restore" = "خریداریاں بحال کریں";
-"settings.pro.description" = "ایپ سے تمام اشتہارات (نیچے کا بینر اور آغاز کا اشتہار) ہٹا دیتا ہے۔ ایپ کی باقی تمام خصوصیات رکنیت کے بغیر بھی مکمل طور پر کام کرتی ہیں۔";
+"settings.pro.description" = "مفت ورژن میں آپ نماز کے اوقات، قبلہ قطب نما، کیمرہ (AR) ویو، اور مساجد کا نقشہ دن میں مجموعی طور پر 3 بار استعمال کر سکتے ہیں۔ Kıble Pro کی رکنیت لینے پر یہ حد ختم ہو جاتی ہے اور آپ کو غیر محدود، بغیر اشتہار کے رسائی ملتی ہے۔";
 "settings.pro.monthly_title" = "Kıble Pro ماہانہ";
 "settings.pro.yearly_title" = "Kıble Pro سالانہ";
 "settings.pro.per_month" = "%@ / ماہ";
@@ -71,6 +72,12 @@
 "settings.pro.purchase_failed" = "خریداری مکمل نہیں ہو سکی: %@";
 "settings.pro.unavailable" = "رکنیت اس وقت دستیاب نہیں، براہ کرم بعد میں دوبارہ کوشش کریں۔";
 "settings.pro.restore_failed" = "خریداریاں بحال نہیں ہو سکیں: %@";
+
+/* روزانہ مفت استعمال کی حد / سبسکرپشن آفر */
+"usage.banner.remaining" = "آج باقی مفت استعمال کی حق: %d/%d";
+"usage.paywall.title" = "آج کی مفت حد ختم ہو گئی ہے";
+"usage.paywall.message" = "آپ نے آج Kıble Bul کی مفت خصوصیات %d بار استعمال کر لی ہیں۔ غیر محدود اور بغیر اشتہار کے رسائی کے لیے Kıble Pro کی رکنیت لیں۔";
+"usage.paywall.reset_note" = "آپ کی روزانہ مفت استعمال کی حد ہر رات 12 بجے دوبارہ مقرر ہو جاتی ہے۔";
 
 /* ترتیبات — اذان کی آواز */
 "settings.ezan_sound.section" = "اذان کی آواز";
