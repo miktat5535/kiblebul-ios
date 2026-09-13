@@ -47,13 +47,14 @@
 /* Notifikasi */
 "notification.title" = "Kıble Bul";
 "notification.body" = "Sudah waktunya %@.";
+
 /* Pengaturan — Kıble Pro */
 "settings.title" = "Pengaturan";
 "settings.pro.section" = "Kıble Bul Pro";
 "settings.pro.active" = "Langganan Anda aktif — bebas iklan";
 "settings.pro.manage" = "Anda dapat mengelola atau membatalkan langganan melalui Pengaturan iPhone > ID Apple > Langganan.";
 "settings.pro.restore" = "Pulihkan Pembelian";
-"settings.pro.description" = "Menghapus semua iklan (banner bawah dan iklan pembuka) dari aplikasi. Semua fitur lainnya berfungsi penuh tanpa langganan.";
+"settings.pro.description" = "Pada versi gratis, Anda dapat menggunakan waktu salat, kompas kiblat, tampilan kamera (AR), dan peta masjid dengan total 3 kali per hari. Dengan berlangganan Kıble Pro, batas ini dihapus dan Anda mendapatkan akses tak terbatas serta bebas iklan.";
 "settings.pro.monthly_title" = "Kıble Pro Bulanan";
 "settings.pro.yearly_title" = "Kıble Pro Tahunan";
 "settings.pro.per_month" = "%@ / bulan";
@@ -71,6 +72,12 @@
 "settings.pro.purchase_failed" = "Pembelian tidak dapat diselesaikan: %@";
 "settings.pro.unavailable" = "Langganan tidak tersedia saat ini, silakan coba lagi nanti.";
 "settings.pro.restore_failed" = "Pembelian tidak dapat dipulihkan: %@";
+
+/* Batas penggunaan gratis harian / Penawaran langganan */
+"usage.banner.remaining" = "Sisa penggunaan gratis hari ini: %d/%d";
+"usage.paywall.title" = "Anda telah mencapai batas gratis hari ini";
+"usage.paywall.message" = "Anda telah menggunakan fitur gratis Kıble Bul %d kali hari ini. Berlangganan Kıble Pro untuk akses tak terbatas dan bebas iklan.";
+"usage.paywall.reset_note" = "Penggunaan gratis harian Anda disetel ulang setiap tengah malam.";
 
 /* Pengaturan — Suara Azan */
 "settings.ezan_sound.section" = "Suara Azan";
