@@ -47,13 +47,14 @@
 /* Benachrichtigungen */
 "notification.title" = "Kıble Bul";
 "notification.body" = "Es ist Zeit für %@.";
+
 /* Einstellungen — Kıble Pro */
 "settings.title" = "Einstellungen";
 "settings.pro.section" = "Kıble Bul Pro";
 "settings.pro.active" = "Ihr Abo ist aktiv — werbefreie Nutzung";
 "settings.pro.manage" = "Sie können Ihr Abo unter iPhone-Einstellungen > Apple-ID > Abonnements verwalten oder kündigen.";
 "settings.pro.restore" = "Käufe wiederherstellen";
-"settings.pro.description" = "Entfernt alle Werbeanzeigen (unteres Banner und Start-Werbung) aus der App. Alle anderen Funktionen der App funktionieren auch ohne Abo vollständig.";
+"settings.pro.description" = "In der kostenlosen Version können Sie Gebetszeiten, den Kibla-Kompass, die Kamera-(AR)-Ansicht und die Moscheenkarte insgesamt 3 Mal pro Tag nutzen. Mit einem Abo für Kıble Pro entfällt dieses Limit und Sie erhalten unbegrenzten, werbefreien Zugriff.";
 "settings.pro.monthly_title" = "Kıble Pro Monatlich";
 "settings.pro.yearly_title" = "Kıble Pro Jährlich";
 "settings.pro.per_month" = "%@ / Monat";
@@ -71,6 +72,12 @@
 "settings.pro.purchase_failed" = "Kauf konnte nicht abgeschlossen werden: %@";
 "settings.pro.unavailable" = "Abo ist momentan nicht verfügbar, bitte später erneut versuchen.";
 "settings.pro.restore_failed" = "Käufe konnten nicht wiederhergestellt werden: %@";
+
+/* Kostenloses Tageslimit / Paywall */
+"usage.banner.remaining" = "Heute verbleibende kostenlose Nutzungen: %d/%d";
+"usage.paywall.title" = "Ihr kostenloses Tageslimit ist erreicht";
+"usage.paywall.message" = "Sie haben die kostenlosen Funktionen von Kıble Bul heute bereits %d Mal genutzt. Abonnieren Sie Kıble Pro für unbegrenzten, werbefreien Zugriff.";
+"usage.paywall.reset_note" = "Ihre kostenlosen täglichen Nutzungen werden jede Nacht um Mitternacht zurückgesetzt.";
 
 /* Einstellungen — Adhan-Sound */
 "settings.ezan_sound.section" = "Adhan-Ton";
