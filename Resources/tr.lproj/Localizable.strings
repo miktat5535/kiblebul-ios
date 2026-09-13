@@ -54,7 +54,7 @@
 "settings.pro.active" = "Aboneliğiniz aktif — reklamsız kullanım";
 "settings.pro.manage" = "Aboneliğinizi iPhone Ayarlar > Apple Kimliği > Abonelikler bölümünden yönetebilir veya iptal edebilirsiniz.";
 "settings.pro.restore" = "Satın Almaları Geri Yükle";
-"settings.pro.description" = "Uygulamadaki tüm reklamları (alt banner ve açılış reklamı) kaldırır. Uygulamanın diğer tüm özellikleri abonelik olmadan da tam olarak çalışır.";
+"settings.pro.description" = "Ücretsiz kullanımda namaz vakitleri, kıble pusulası, kamera (AR) ve cami haritası özelliklerini günde toplam 3 kez kullanabilirsiniz. Kıble Pro'ya abone olduğunuzda bu sınır kalkar; reklamsız ve sınırsız kullanırsınız.";
 "settings.pro.monthly_title" = "Kıble Pro Aylık";
 "settings.pro.yearly_title" = "Kıble Pro Yıllık";
 "settings.pro.per_month" = "%@ / ay";
@@ -72,6 +72,12 @@
 "settings.pro.purchase_failed" = "Satın alma tamamlanamadı: %@";
 "settings.pro.unavailable" = "Abonelik şu anda kullanılamıyor, lütfen daha sonra tekrar deneyin.";
 "settings.pro.restore_failed" = "Satın almalar geri yüklenemedi: %@";
+
+/* Ücretsiz kullanım hakkı / Paywall */
+"usage.banner.remaining" = "Bugün kalan ücretsiz kullanım hakkınız: %d/%d";
+"usage.paywall.title" = "Günlük kullanım hakkınız doldu";
+"usage.paywall.message" = "Kıble Bul'u bugün ücretsiz olarak %d kez kullandınız. Sınırsız ve reklamsız kullanmak için Kıble Pro'ya abone olabilirsiniz.";
+"usage.paywall.reset_note" = "Ücretsiz kullanım hakkınız her gün gece yarısı yenilenir.";
 
 /* Ayarlar — Ezan Sesi */
 "settings.ezan_sound.section" = "Ezan Sesi";
