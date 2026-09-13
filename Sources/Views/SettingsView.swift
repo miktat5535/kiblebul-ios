@@ -98,7 +98,7 @@ struct SettingsView: View {
                 }
 
                 Section("settings.about.section") {
-                    LabeledContent("settings.about.version", value: "1.1")
+                    LabeledContent("settings.about.version", value: "1.2")
                     Link("settings.about.privacy", destination: URL(string: "https://miktat5535.github.io/kiblebul-privacy-policy/")!)
                 }
             }
