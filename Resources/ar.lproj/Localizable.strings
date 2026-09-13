@@ -47,13 +47,14 @@
 /* الإشعارات */
 "notification.title" = "Kıble Bul";
 "notification.body" = "حان وقت %@.";
+
 /* الإعدادات — Kıble Pro */
 "settings.title" = "الإعدادات";
 "settings.pro.section" = "Kıble Bul Pro";
 "settings.pro.active" = "اشتراكك نشط — استخدام بدون إعلانات";
 "settings.pro.manage" = "يمكنك إدارة اشتراكك أو إلغاءه من إعدادات iPhone > Apple ID > الاشتراكات.";
 "settings.pro.restore" = "استعادة المشتريات";
-"settings.pro.description" = "يزيل جميع الإعلانات (الشريط السفلي وإعلان البدء) من التطبيق. جميع الميزات الأخرى تعمل بالكامل بدون اشتراك.";
+"settings.pro.description" = "في النسخة المجانية يمكنك استخدام أوقات الصلاة وبوصلة القبلة وشاشة الكاميرا (AR) وخريطة المساجد 3 مرات يوميًا كحد إجمالي. عند الاشتراك في Kıble Pro يُزال هذا الحد وتحصل على استخدام غير محدود وبدون إعلانات.";
 "settings.pro.monthly_title" = "Kıble Pro شهري";
 "settings.pro.yearly_title" = "Kıble Pro سنوي";
 "settings.pro.per_month" = "%@ / شهريًا";
@@ -71,6 +72,12 @@
 "settings.pro.purchase_failed" = "تعذّر إتمام الشراء: %@";
 "settings.pro.unavailable" = "الاشتراك غير متاح حاليًا، يرجى المحاولة لاحقًا.";
 "settings.pro.restore_failed" = "تعذّرت استعادة المشتريات: %@";
+
+/* حد الاستخدام اليومي المجاني / شاشة الاشتراك */
+"usage.banner.remaining" = "استخداماتك المجانية المتبقية اليوم: %d/%d";
+"usage.paywall.title" = "لقد استهلكت حد الاستخدام المجاني اليوم";
+"usage.paywall.message" = "لقد استخدمت ميزات Kıble Bul المجانية %d مرات اليوم. يمكنك الاشتراك في Kıble Pro للحصول على استخدام غير محدود وبدون إعلانات.";
+"usage.paywall.reset_note" = "يتجدد حد استخدامك المجاني اليومي كل ليلة عند منتصف الليل.";
 
 /* الإعدادات — صوت الأذان */
 "settings.ezan_sound.section" = "صوت الأذان";
