@@ -12,12 +12,17 @@ struct KibleBulApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) private var appDelegate
     @StateObject private var storeManager = StoreManager()
     @StateObject private var adsManager = AdsManager()
+    // Ücretsiz kullanıcılar için günde toplam 3 kullanım hakkı sayacı
+    // (Pusula + Namaz Vakitleri + Kamera (AR) + Camiler ortak havuzu).
+    // Bkz. DailyUsageLimiter.swift.
+    @StateObject private var usageLimiter = DailyUsageLimiter()
 
     var body: some Scene {
         WindowGroup {
             ContentView()
                 .environmentObject(storeManager)
                 .environmentObject(adsManager)
+                .environmentObject(usageLimiter)
                 .task {
                     // Uygulama ilk açıldığında: rıza (UMP) akışını başlat,
                     // ardından reklam altyapısını ve abonelik durumunu yükle.

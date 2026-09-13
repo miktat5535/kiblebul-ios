@@ -18,17 +18,22 @@ struct ContentView: View {
         // sekmeye basılamıyordu. Banner'ı VStack ile sekme çubuğunun ALTINA
         // alarak bu çakışma tamamen ortadan kalkar.
         VStack(spacing: 0) {
+            // Pusula, Namaz Vakitleri, Kamera (AR) ve Camiler sekmeleri
+            // ücretsiz kullanıcılar için ortak bir günlük kullanım hakkı
+            // havuzunu paylaşır (bkz. `UsageGatedContainer`,
+            // `DailyUsageLimiter`). Ayarlar sekmesi bu sınıra dahil değildir
+            // — abone olma/geri yükleme her zaman erişilebilir olmalı.
             TabView {
-                CompassView()
+                UsageGatedContainer { CompassView() }
                     .tabItem { Label("tab.compass", systemImage: "location.north.circle") }
 
-                PrayerTimesView()
+                UsageGatedContainer { PrayerTimesView() }
                     .tabItem { Label("tab.prayer_times", systemImage: "clock") }
 
-                CameraARView()
+                UsageGatedContainer { CameraARView() }
                     .tabItem { Label("tab.camera", systemImage: "camera") }
 
-                MosqueMapView()
+                UsageGatedContainer { MosqueMapView() }
                     .tabItem { Label("tab.mosques", systemImage: "map") }
 
                 SettingsView()
@@ -69,4 +74,5 @@ struct ContentView: View {
     ContentView()
         .environmentObject(StoreManager())
         .environmentObject(AdsManager())
+        .environmentObject(DailyUsageLimiter())
 }
