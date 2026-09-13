@@ -47,13 +47,14 @@
 /* Notifications */
 "notification.title" = "Kıble Bul";
 "notification.body" = "C'est l'heure de %@.";
+
 /* Réglages — Kıble Pro */
 "settings.title" = "Réglages";
 "settings.pro.section" = "Kıble Bul Pro";
 "settings.pro.active" = "Votre abonnement est actif — utilisation sans publicité";
 "settings.pro.manage" = "Vous pouvez gérer ou annuler votre abonnement depuis Réglages iPhone > Identifiant Apple > Abonnements.";
 "settings.pro.restore" = "Restaurer les achats";
-"settings.pro.description" = "Supprime toutes les publicités (bannière du bas et publicité de lancement) de l'application. Toutes les autres fonctionnalités fonctionnent pleinement sans abonnement.";
+"settings.pro.description" = "Dans la version gratuite, vous pouvez utiliser les horaires de prière, la boussole qibla, la vue caméra (RA) et la carte des mosquées un total de 3 fois par jour. En vous abonnant à Kıble Pro, cette limite est supprimée et vous bénéficiez d'un accès illimité et sans publicité.";
 "settings.pro.monthly_title" = "Kıble Pro Mensuel";
 "settings.pro.yearly_title" = "Kıble Pro Annuel";
 "settings.pro.per_month" = "%@ / mois";
@@ -71,6 +72,12 @@
 "settings.pro.purchase_failed" = "L'achat n'a pas pu être finalisé : %@";
 "settings.pro.unavailable" = "L'abonnement n'est pas disponible pour le moment, veuillez réessayer plus tard.";
 "settings.pro.restore_failed" = "Les achats n'ont pas pu être restaurés : %@";
+
+/* Limite d'utilisation gratuite quotidienne / Offre d'abonnement */
+"usage.banner.remaining" = "Utilisations gratuites restantes aujourd'hui : %d/%d";
+"usage.paywall.title" = "Vous avez atteint la limite gratuite du jour";
+"usage.paywall.message" = "Vous avez utilisé les fonctionnalités gratuites de Kıble Bul %d fois aujourd'hui. Abonnez-vous à Kıble Pro pour un accès illimité et sans publicité.";
+"usage.paywall.reset_note" = "Vos utilisations gratuites quotidiennes se réinitialisent chaque nuit à minuit.";
 
 /* Réglages — Son de l'appel à la prière */
 "settings.ezan_sound.section" = "Son de l'appel à la prière";
