@@ -54,7 +54,7 @@
 "settings.pro.active" = "Your subscription is active — ad-free";
 "settings.pro.manage" = "You can manage or cancel your subscription from iPhone Settings > Apple ID > Subscriptions.";
 "settings.pro.restore" = "Restore Purchases";
-"settings.pro.description" = "Removes all ads (bottom banner and launch ad) from the app. Every other feature works fully without a subscription.";
+"settings.pro.description" = "In the free version you can use prayer times, the qibla compass, the camera (AR) view, and the mosque map a total of 3 times per day. Subscribing to Kıble Pro removes this limit and gives you unlimited, ad-free access.";
 "settings.pro.monthly_title" = "Kıble Pro Monthly";
 "settings.pro.yearly_title" = "Kıble Pro Yearly";
 "settings.pro.per_month" = "%@ / month";
@@ -72,6 +72,12 @@
 "settings.pro.purchase_failed" = "Purchase couldn't be completed: %@";
 "settings.pro.unavailable" = "Subscription isn't available right now, please try again later.";
 "settings.pro.restore_failed" = "Purchases couldn't be restored: %@";
+
+/* Free daily usage / Paywall */
+"usage.banner.remaining" = "Free uses remaining today: %d/%d";
+"usage.paywall.title" = "You've reached today's free limit";
+"usage.paywall.message" = "You've used Kıble Bul's free features %d times today. Subscribe to Kıble Pro for unlimited, ad-free access.";
+"usage.paywall.reset_note" = "Your free daily uses reset every night at midnight.";
 
 /* Settings — Adhan Sound */
 "settings.ezan_sound.section" = "Adhan Sound";
