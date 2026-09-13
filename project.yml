@@ -55,8 +55,8 @@ targets:
       properties:
         CFBundleDisplayName: "Kıble Bul"
         CFBundleIconName: "AppIcon"
-        CFBundleShortVersionString: "1.1"
-        CFBundleVersion: "8"
+        CFBundleShortVersionString: "1.2"
+        CFBundleVersion: "9"
         # Dil desteği: uygulama Türkçe'yi temel dil olarak kullanır, geri kalan
         # 8 dil aşağıdaki listede tanımlıdır. Her .lproj klasöründeki
         # Localizable.strings / InfoPlist.strings dosyaları XcodeGen tarafından
@@ -124,8 +124,8 @@ targets:
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.miktat55.kiblebul
-        MARKETING_VERSION: "1.1"
-        CURRENT_PROJECT_VERSION: "8"
+        MARKETING_VERSION: "1.2"
+        CURRENT_PROJECT_VERSION: "9"
         SWIFT_VERSION: "5.0"
         TARGETED_DEVICE_FAMILY: "1"
         DEVELOPMENT_TEAM: ""
